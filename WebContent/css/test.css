@@ -1,0 +1,117 @@
+<style type="text/css">
+.red {
+    color: red; 
+}
+table {
+    border: 3px solid #AACCFF;
+}
+table.items td{
+    border: 3px solid #AACCFF;
+}
+input[type=text] {
+	background-color: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+input[type=password] {
+	background-color: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+input[type=email] {
+	background-color: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+select {
+	background-color: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+button[type="button"] {
+	background: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+button[type="button"]:hover {
+	background: #AACCFF;
+	color: #222233;
+	font-family: Calibri, Myriad;
+}
+textarea {
+	background-color: #222233;
+	color: #AACCFF;
+	font-family: Calibri, Myriad;
+}
+.orange {
+    color: orange;
+}
+.blue {
+	color: blue;
+}
+.smallVanrednaSituacijaImage img {
+	max-width: 100px;
+	max-height: 100px;
+}
+.smallVolonterImage img {
+	max-width: 75px;
+	max-height: 75px;
+}
+.detailVanrednaSituacijaImage img {
+	max-width: 300px;
+	max-height: 200px;
+}
+.detailVolonterImage img {
+	max-width: 200px;
+	max-height: 200px;
+}
+.comments {
+    table-layout: fixed;
+    /*width: 100%;*/
+}
+
+.commentCell {
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #AACCFF;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #222233;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #222233;
+    color: #AACCFF;
+}
+
+h1 {
+	font-family: Verdana;
+	border-style:solid;
+	border-color:#AACCFF;
+	padding: 25px;
+}
+
+h4 {
+	font-family: Verdana;
+	border-style:solid;
+	border-color:#AACCFF;
+	padding: 5px;
+	position:fixed;
+	right: 20px;
+	bottom: 10px;
+}
+
+</style>

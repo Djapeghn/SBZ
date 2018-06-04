@@ -5,28 +5,30 @@ import java.util.Date;
 
 public class Pregled {
 
-	private int idPregleda;
+	private String idPregleda;
 	private Korisnik lekar;
 	private Date datumPregleda;
-	private ArrayList<Simptom> simptomi = new ArrayList<Simptom>();
+	private ArrayList<String> simptomi = new ArrayList<String>();
 	private Bolest dijagnostikovanaBolest;
+	private Lek propisanLek;
 	public Pregled() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Pregled(int idPregleda, Korisnik lekar, Date datumPregleda, ArrayList<Simptom> simptomi,
-			Bolest dijagnostikovanaBolest) {
+	public Pregled(String idPregleda, Korisnik lekar, Date datumPregleda, ArrayList<String> simptomi,
+			Bolest dijagnostikovanaBolest, Lek propisanLek) {
 		super();
 		this.idPregleda = idPregleda;
 		this.lekar = lekar;
 		this.datumPregleda = datumPregleda;
 		this.simptomi = simptomi;
 		this.dijagnostikovanaBolest = dijagnostikovanaBolest;
+		this.propisanLek = propisanLek;
 	}
-	public int getIdPregleda() {
+	public String getIdPregleda() {
 		return idPregleda;
 	}
-	public void setIdPregleda(int idPregleda) {
+	public void setIdPregleda(String idPregleda) {
 		this.idPregleda = idPregleda;
 	}
 	public Korisnik getLekar() {
@@ -41,10 +43,10 @@ public class Pregled {
 	public void setDatumPregleda(Date datumPregleda) {
 		this.datumPregleda = datumPregleda;
 	}
-	public ArrayList<Simptom> getSimptomi() {
+	public ArrayList<String> getSimptomi() {
 		return simptomi;
 	}
-	public void setSimptomi(ArrayList<Simptom> simptomi) {
+	public void setSimptomi(ArrayList<String> simptomi) {
 		this.simptomi = simptomi;
 	}
 	public Bolest getDijagnostikovanaBolest() {
@@ -53,5 +55,11 @@ public class Pregled {
 	public void setDijagnostikovanaBolest(Bolest dijagnostikovanaBolest) {
 		this.dijagnostikovanaBolest = dijagnostikovanaBolest;
 	}
-	
+	public Lek getPropisanLek() {
+		return propisanLek;
+	}
+	public void setPropisanLek(Lek propisanLek) {
+		this.propisanLek = propisanLek;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Pacijent {
 
+	private String idPacijent;
 	private String ime;
 	private String prezime;
 	private Date datumRodjenja;
@@ -16,9 +17,10 @@ public class Pacijent {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Pacijent(String ime, String prezime, Date datumRodjenja, String pol, ArrayList<Pregled> pregledi,
-			ArrayList<Bolest> bolesti, ArrayList<Lek> alergicanNaLekove) {
+	public Pacijent(String idPacijent, String ime, String prezime, Date datumRodjenja, String pol,
+			ArrayList<Pregled> pregledi, ArrayList<Bolest> bolesti, ArrayList<Lek> alergicanNaLekove) {
 		super();
+		this.idPacijent = idPacijent;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.datumRodjenja = datumRodjenja;
@@ -26,6 +28,12 @@ public class Pacijent {
 		this.pregledi = pregledi;
 		this.bolesti = bolesti;
 		this.alergicanNaLekove = alergicanNaLekove;
+	}
+	public String getIdPacijent() {
+		return idPacijent;
+	}
+	public void setIdPacijent(String idPacijent) {
+		this.idPacijent = idPacijent;
 	}
 	public String getIme() {
 		return ime;
@@ -69,7 +77,7 @@ public class Pacijent {
 	public void setAlergicanNaLekove(ArrayList<Lek> alergicanNaLekove) {
 		this.alergicanNaLekove = alergicanNaLekove;
 	}
-	
+
 	
 	
 }

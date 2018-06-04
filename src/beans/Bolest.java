@@ -4,18 +4,29 @@ import java.util.ArrayList;
 
 public class Bolest {
 
+	private String idBolest;
 	private String naziv;
-	private GrupaBolesti grupa;
-	private ArrayList<Simptom> simptomi = new ArrayList<Simptom>();
+	private String grupa;
+	private ArrayList<Simptom> opstiSimptomi = new ArrayList<Simptom>();
+	private ArrayList<Simptom> specificniSimptomi = new ArrayList<Simptom>();
 	public Bolest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bolest(String naziv, GrupaBolesti grupa, ArrayList<Simptom> simptomi) {
+	public Bolest(String idBolest, String naziv, String grupa, ArrayList<Simptom> opstiSimptomi,
+			ArrayList<Simptom> specificniSimptomi) {
 		super();
+		this.idBolest = idBolest;
 		this.naziv = naziv;
 		this.grupa = grupa;
-		this.simptomi = simptomi;
+		this.opstiSimptomi = opstiSimptomi;
+		this.specificniSimptomi = specificniSimptomi;
+	}
+	public String getIdBolest() {
+		return idBolest;
+	}
+	public void setIdBolest(String idBolest) {
+		this.idBolest = idBolest;
 	}
 	public String getNaziv() {
 		return naziv;
@@ -23,17 +34,23 @@ public class Bolest {
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
-	public GrupaBolesti getGrupa() {
+	public String getGrupa() {
 		return grupa;
 	}
-	public void setGrupa(GrupaBolesti grupa) {
+	public void setGrupa(String grupa) {
 		this.grupa = grupa;
 	}
-	public ArrayList<Simptom> getSimptomi() {
-		return simptomi;
+	public ArrayList<Simptom> getOpstiSimptomi() {
+		return opstiSimptomi;
 	}
-	public void setSimptomi(ArrayList<Simptom> simptomi) {
-		this.simptomi = simptomi;
+	public void setOpstiSimptomi(ArrayList<Simptom> opstiSimptomi) {
+		this.opstiSimptomi = opstiSimptomi;
 	}
-	
+	public ArrayList<Simptom> getSpecificniSimptomi() {
+		return specificniSimptomi;
+	}
+	public void setSpecificniSimptomi(ArrayList<Simptom> specificniSimptomi) {
+		this.specificniSimptomi = specificniSimptomi;
+	}
+
 }

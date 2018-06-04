@@ -4,25 +4,35 @@ import java.util.Date;
 
 public class Korisnik {
 
+	private String idKorisnik;
 	private String ime;
 	private String prezime;
+	private String email;
 	private Date datumRodjenja;
 	private String korisnickoIme;
 	private String lozinka;
-	private TipKorisnika tipKorisnika;
+	private String tipKorisnika;
 	public Korisnik() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Korisnik(String ime, String prezime, Date datumRodjenja, String korisnickoIme, String lozinka,
-			TipKorisnika tipKorisnika) {
+	public Korisnik(String idKorisnik, String ime, String prezime, String email, Date datumRodjenja, String korisnickoIme,
+			String lozinka, String tipKorisnika) {
 		super();
+		this.idKorisnik = idKorisnik;
 		this.ime = ime;
 		this.prezime = prezime;
+		this.email = email;
 		this.datumRodjenja = datumRodjenja;
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.tipKorisnika = tipKorisnika;
+	}
+	public String getIdKorisnik() {
+		return idKorisnik;
+	}
+	public void setIdKorisnik(String idKorisnik) {
+		this.idKorisnik = idKorisnik;
 	}
 	public String getIme() {
 		return ime;
@@ -35,6 +45,12 @@ public class Korisnik {
 	}
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public Date getDatumRodjenja() {
 		return datumRodjenja;
@@ -54,18 +70,11 @@ public class Korisnik {
 	public void setLozinka(String lozinka) {
 		this.lozinka = lozinka;
 	}
-	public TipKorisnika getTipKorisnika() {
+	public String getTipKorisnika() {
 		return tipKorisnika;
 	}
-	public void setTipKorisnika(TipKorisnika tipKorisnika) {
+	public void setTipKorisnika(String tipKorisnika) {
 		this.tipKorisnika = tipKorisnika;
 	}
-	@Override
-	public String toString() {
-		return "Korisnik [ime=" + ime + ", prezime=" + prezime + ", datumRodjenja=" + datumRodjenja + ", korisnickoIme="
-				+ korisnickoIme + ", lozinka=" + lozinka + ", tipKorisnika=" + tipKorisnika + "]";
-	}
-	
-	
 	
 }

@@ -1,5 +1,5 @@
-0000|lek1|sastojak1;sastojak2;sastojak4|antibiotici
-0001|lek2|sastojak2;sastojak3|analgetici
-0002|lek4|sastojak5;sastojak2;sastojak6|ostalo
-0003|lek5|sastojak4;sastojak1|analgetici
-0004|lek3|sastojak12;sastojak2;sastojak1|antibiotici
+0000|lek1|SASTOJAK1;SASTOJAK2;SASTOJAK4|ANTIBIOTICI
+0001|lek2|SASTOJAK2;SASTOJAK3|ANALGETICI
+0002|lek4|SASTOJAK5;SASTOJAK2;SASTOJAK4|OSTALO
+0003|lek5|SASTOJAK4;SASTOJAK1|ANALGETICI
+0004|lek3|SASTOJAK1;SASTOJAK2;SASTOJAK4|ANTIBIOTICI

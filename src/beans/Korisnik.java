@@ -11,13 +11,13 @@ public class Korisnik {
 	private Date datumRodjenja;
 	private String korisnickoIme;
 	private String lozinka;
-	private String tipKorisnika;
+	private TipKorisnika tipKorisnika;
 	public Korisnik() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Korisnik(String idKorisnik, String ime, String prezime, String email, Date datumRodjenja, String korisnickoIme,
-			String lozinka, String tipKorisnika) {
+	public Korisnik(String idKorisnik, String ime, String prezime, String email, Date datumRodjenja,
+			String korisnickoIme, String lozinka, TipKorisnika tipKorisnika) {
 		super();
 		this.idKorisnik = idKorisnik;
 		this.ime = ime;
@@ -70,11 +70,19 @@ public class Korisnik {
 	public void setLozinka(String lozinka) {
 		this.lozinka = lozinka;
 	}
-	public String getTipKorisnika() {
+	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
 	}
-	public void setTipKorisnika(String tipKorisnika) {
+	public void setTipKorisnika(TipKorisnika tipKorisnika) {
 		this.tipKorisnika = tipKorisnika;
 	}
+	@Override
+	public String toString() {
+		return "Korisnik [idKorisnik=" + idKorisnik + ", ime=" + ime + ", prezime=" + prezime + ", email=" + email
+				+ ", datumRodjenja=" + datumRodjenja + ", korisnickoIme=" + korisnickoIme + ", lozinka=" + lozinka
+				+ ", tipKorisnika=" + tipKorisnika + "]";
+	}
+
+	
 	
 }

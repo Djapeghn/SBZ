@@ -1,0 +1,403 @@
+package beans;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class FileData {
+
+	private HashMap<String, Lek> lekovi = new HashMap<String, Lek>();
+	private HashMap<String, Korisnik> korisnici = new HashMap<String,Korisnik>();
+	private HashMap<String, Bolest> bolesti = new HashMap<String,Bolest>();
+	private HashMap<String, Pregled> pregledi = new HashMap<String,Pregled>();
+	private HashMap<String, Pacijent> pacijenti = new HashMap<String,Pacijent>();
+	private String path;
+	
+	public FileData() {
+		super();
+	}
+	public FileData(String path) {
+		super();
+		BufferedReader in = null;
+		this.path = path;
+		try {
+			readLekovi(path);
+			readKorisnici(path);
+			readBolesti(path);
+			readPregledi(path);
+			readPacijenti(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if ( in != null ) {
+				try {
+					in.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	private void readLekovi(String path) {
+
+        try {
+            
+            String idLek = "", naziv = "";
+            ArrayList<Sastojak> sastojci = new ArrayList<Sastojak>();
+            GrupaLekova grupaLekova;
+            Lek lek = new Lek();
+            
+        	
+			File file = new File(path + "files/lekovi");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readLine = "";
+            String[] splittedLine;
+            
+            while ((readLine = bufferedReader.readLine()) != null) {
+                
+            	splittedLine = readLine.split("\\|",5000);
+				
+				idLek = splittedLine[0];
+				naziv = splittedLine[1];
+				
+				String[] splittedSastojci = splittedLine[2].split(";");
+				
+				for(String sastojak : splittedSastojci) {
+					
+					sastojci.add(Sastojak.valueOf(sastojak));
+				}
+				
+				grupaLekova = GrupaLekova.valueOf(splittedLine[3]);
+				
+				lek = new Lek(idLek,naziv,sastojci,grupaLekova);
+				
+				lekovi.put(idLek, lek);
+				
+	            idLek = "";
+	            naziv = "";
+	            sastojci = new ArrayList<Sastojak>();
+	            lek = new Lek();
+				
+				//System.out.println(lek.toString());
+            }
+
+			fileReader.close();
+			bufferedReader.close();
+            
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void readKorisnici(String path) {
+
+        try {
+        	
+        	String idKorisnik = "", ime = "", prezime = "",
+        	email = "", korisnickoIme = "", lozinka = "";
+        	Date datumRodjenja;
+        	TipKorisnika tipKorisnika;
+        	Korisnik k = new Korisnik();
+            
+			File file = new File(path + "files/korisnici");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readLine = "";
+            String[] splittedLine;
+            
+            while ((readLine = bufferedReader.readLine()) != null) {
+                
+            	splittedLine = readLine.split("\\|",5000);
+				
+				idKorisnik = splittedLine[0];
+				ime = splittedLine[1];
+				prezime = splittedLine[2];
+				email = splittedLine[3];
+				datumRodjenja = convertStringToDate(splittedLine[4]);
+				korisnickoIme = splittedLine[5];
+				lozinka = splittedLine[6];
+				tipKorisnika = TipKorisnika.valueOf(splittedLine[7]);
+				
+				k = new Korisnik(idKorisnik, ime, prezime, email, datumRodjenja, korisnickoIme, lozinka, tipKorisnika);
+				
+				korisnici.put(idKorisnik, k);
+				
+	        	idKorisnik = "";
+	        	ime = "";
+	        	prezime = "";
+	            email = "";
+	            korisnickoIme = "";
+	            lozinka = "";
+	            datumRodjenja = new Date();
+	            k = new Korisnik();
+				
+				//System.out.println(k.toString());
+            }
+
+			fileReader.close();
+			bufferedReader.close();
+            
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void readBolesti(String path) {
+
+        try {
+        	
+        	String idBolest = "", naziv = "";
+        	GrupaBolesti grupa;
+        	ArrayList<Simptom> opstiSimptomi = new ArrayList<Simptom>();
+        	ArrayList<Simptom> specificniSimptomi = new ArrayList<Simptom>();
+        	Bolest b = new Bolest();
+            
+			File file = new File(path + "files/bolesti");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readLine = "";
+            String[] splittedLine;
+            
+            while ((readLine = bufferedReader.readLine()) != null) {
+                
+            	splittedLine = readLine.split("\\|",5000);
+				
+				idBolest = splittedLine[0];
+				naziv = splittedLine[1];
+				grupa = GrupaBolesti.valueOf(splittedLine[2]);
+				String[] splittedSimptomi = splittedLine[3].split(";");
+				
+				for(String simptomString : splittedSimptomi) {
+					
+					String[] splittedSimptomString = simptomString.split(":");
+					
+					if(splittedSimptomString[1].equals("1")) {
+						
+						opstiSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
+						
+					} else {
+						
+						specificniSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
+						
+					}
+				}
+				
+				b = new Bolest(idBolest, naziv, grupa, opstiSimptomi, specificniSimptomi);
+				
+				bolesti.put(idBolest, b);
+				
+	        	idBolest = "";
+	        	naziv = "";
+	        	opstiSimptomi = new ArrayList<Simptom>();
+	        	specificniSimptomi = new ArrayList<Simptom>();
+	        	b = new Bolest();
+				
+				//System.out.println(b.toString());
+            }
+
+			fileReader.close();
+			bufferedReader.close();
+            
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void readPregledi(String path) {
+
+        try {
+        	
+        	String idPregleda = "";
+        	Korisnik lekar = new Korisnik();
+        	Date datumPregleda;
+        	ArrayList<Simptom> simptomi = new ArrayList<Simptom>();
+        	Bolest dijagnostikovanaBolest = new Bolest();
+        	Lek propisanLek = new Lek();
+        	Pregled p = new Pregled();
+            
+			File file = new File(path + "files/pregledi");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readLine = "";
+            String[] splittedLine;
+            
+            while ((readLine = bufferedReader.readLine()) != null) {
+                
+            	splittedLine = readLine.split("\\|",5000);
+				
+				idPregleda = splittedLine[0];
+				
+				if(korisnici.containsKey(splittedLine[1])) {
+					lekar = korisnici.get(splittedLine[1]);
+				}
+				datumPregleda = convertStringToDate(splittedLine[2]);
+				
+				String[] splittedSimptomi = splittedLine[3].split(";");
+				
+				for(String simptomString : splittedSimptomi) {
+						
+					simptomi.add(Simptom.valueOf(simptomString));
+				}
+				
+				if(bolesti.containsKey(splittedLine[4])) {
+					dijagnostikovanaBolest = bolesti.get(splittedLine[4]);
+				}
+				
+				if(lekovi.containsKey(splittedLine[5])) {
+					propisanLek = lekovi.get(splittedLine[5]);
+				}
+				
+				p = new Pregled(idPregleda,lekar,datumPregleda,simptomi,dijagnostikovanaBolest,propisanLek);
+				
+				pregledi.put(idPregleda, p);
+				
+	        	idPregleda = "";
+	        	lekar = new Korisnik();
+	        	datumPregleda = new Date();
+	        	simptomi = new ArrayList<Simptom>();
+	        	dijagnostikovanaBolest = new Bolest();
+	        	propisanLek = new Lek();
+	        	p = new Pregled();
+				
+				//System.out.println(p.toString());
+            }
+
+			fileReader.close();
+			bufferedReader.close();
+            
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private void readPacijenti(String path) {
+
+        try {
+        	
+        	String idPacijent = "", ime = "", prezime = "", pol = "";
+        	Date datumRodjenja;
+        	ArrayList<Pregled> preglediPacijenta = new ArrayList<Pregled>();
+        	ArrayList<Bolest> bolestiPacijenta = new ArrayList<Bolest>();
+        	ArrayList<Lek> alergicanNaLekove = new ArrayList<Lek>();
+        	Pacijent p = new Pacijent();
+            
+			File file = new File(path + "files/pacijenti");
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readLine = "";
+            String[] splittedLine;
+            
+            while ((readLine = bufferedReader.readLine()) != null) {
+                
+            	splittedLine = readLine.split("\\|",5000);
+				
+				idPacijent = splittedLine[0];
+				ime = splittedLine[1];
+				prezime = splittedLine[2];
+				datumRodjenja = convertStringToDate(splittedLine[3]);
+				pol = splittedLine[4];
+				
+				if(!(splittedLine[5].equals(""))) {
+					
+					String[] splittedPregledi = splittedLine[5].split(";");
+					
+					for(int i=0; i<splittedPregledi.length; i++) {
+						if(pregledi.containsKey(splittedPregledi[i])) {
+							preglediPacijenta.add(pregledi.get(splittedPregledi[i]));
+						}
+					}
+					
+				}
+				
+				if(!(splittedLine[6].equals(""))) {
+					
+					String[] splittedBolesti = splittedLine[6].split(";");
+					
+					for(int i=0; i<splittedBolesti.length; i++) {
+						if(bolesti.containsKey(splittedBolesti[i])) {
+							bolestiPacijenta.add(bolesti.get(splittedBolesti[i]));
+						}
+					}
+					
+				}
+				
+				if(!(splittedLine[7].equals(""))) {
+					
+					String[] splittedLekovi = splittedLine[7].split(";");
+					
+					for(int i=0; i<splittedLekovi.length; i++) {
+						if(lekovi.containsKey(splittedLekovi[i])) {
+							alergicanNaLekove.add(lekovi.get(splittedLekovi[i]));
+						}
+					}
+					
+				}
+				
+				p = new Pacijent(idPacijent, ime, prezime, datumRodjenja, pol, preglediPacijenta, bolestiPacijenta, alergicanNaLekove);
+				
+				pacijenti.put(idPacijent, p);
+				
+	        	idPacijent = "";
+	        	ime = "";
+	        	prezime = "";
+	        	pol = "";
+	        	datumRodjenja = new Date();
+	        	preglediPacijenta = new ArrayList<Pregled>();
+	        	bolestiPacijenta = new ArrayList<Bolest>();
+	        	alergicanNaLekove = new ArrayList<Lek>();
+	        	p = new Pacijent();
+				
+				//System.out.println(p.toString());
+				
+            }
+
+			fileReader.close();
+			bufferedReader.close();
+			
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private Date convertStringToDate(String dateString)
+	{
+	    Date date = null;
+	    DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+	    try{
+	        date = df.parse(dateString);
+	    }
+	    catch ( Exception ex ){
+	        System.out.println(ex);
+	    }
+	    return date;
+	}
+}

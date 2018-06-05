@@ -77,6 +77,12 @@ public class Pacijent {
 	public void setAlergicanNaLekove(ArrayList<Lek> alergicanNaLekove) {
 		this.alergicanNaLekove = alergicanNaLekove;
 	}
+	@Override
+	public String toString() {
+		return "Pacijent [idPacijent=" + idPacijent + ", ime=" + ime + ", prezime=" + prezime + ", datumRodjenja="
+				+ datumRodjenja + ", pol=" + pol + ", pregledi=" + pregledi + ", bolesti=" + bolesti
+				+ ", alergicanNaLekove=" + alergicanNaLekove + "]";
+	}
 
 	
 	

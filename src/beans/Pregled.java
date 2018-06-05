@@ -8,14 +8,14 @@ public class Pregled {
 	private String idPregleda;
 	private Korisnik lekar;
 	private Date datumPregleda;
-	private ArrayList<String> simptomi = new ArrayList<String>();
+	private ArrayList<Simptom> simptomi = new ArrayList<Simptom>();
 	private Bolest dijagnostikovanaBolest;
 	private Lek propisanLek;
 	public Pregled() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Pregled(String idPregleda, Korisnik lekar, Date datumPregleda, ArrayList<String> simptomi,
+	public Pregled(String idPregleda, Korisnik lekar, Date datumPregleda, ArrayList<Simptom> simptomi,
 			Bolest dijagnostikovanaBolest, Lek propisanLek) {
 		super();
 		this.idPregleda = idPregleda;
@@ -43,10 +43,10 @@ public class Pregled {
 	public void setDatumPregleda(Date datumPregleda) {
 		this.datumPregleda = datumPregleda;
 	}
-	public ArrayList<String> getSimptomi() {
+	public ArrayList<Simptom> getSimptomi() {
 		return simptomi;
 	}
-	public void setSimptomi(ArrayList<String> simptomi) {
+	public void setSimptomi(ArrayList<Simptom> simptomi) {
 		this.simptomi = simptomi;
 	}
 	public Bolest getDijagnostikovanaBolest() {
@@ -61,5 +61,13 @@ public class Pregled {
 	public void setPropisanLek(Lek propisanLek) {
 		this.propisanLek = propisanLek;
 	}
+	@Override
+	public String toString() {
+		return "Pregled [idPregleda=" + idPregleda + ", lekar=" + lekar + ", datumPregleda=" + datumPregleda
+				+ ", simptomi=" + simptomi + ", dijagnostikovanaBolest=" + dijagnostikovanaBolest + ", propisanLek="
+				+ propisanLek + "]";
+	}
 
+	
+	
 }

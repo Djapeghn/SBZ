@@ -576,6 +576,42 @@ public class FileData {
 		return pacijenti.get(id);
 	}
 	
+	public HashMap<String, Lek> getLekovi() {
+		return lekovi;
+	}
+	public void setLekovi(HashMap<String, Lek> lekovi) {
+		this.lekovi = lekovi;
+	}
+	public HashMap<String, Korisnik> getKorisnici() {
+		return korisnici;
+	}
+	public void setKorisnici(HashMap<String, Korisnik> korisnici) {
+		this.korisnici = korisnici;
+	}
+	public HashMap<String, Bolest> getBolesti() {
+		return bolesti;
+	}
+	public void setBolesti(HashMap<String, Bolest> bolesti) {
+		this.bolesti = bolesti;
+	}
+	public HashMap<String, Pregled> getPregledi() {
+		return pregledi;
+	}
+	public void setPregledi(HashMap<String, Pregled> pregledi) {
+		this.pregledi = pregledi;
+	}
+	public HashMap<String, Pacijent> getPacijenti() {
+		return pacijenti;
+	}
+	public void setPacijenti(HashMap<String, Pacijent> pacijenti) {
+		this.pacijenti = pacijenti;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	private Date convertStringToDate(String dateString)
 	{
 	    Date date = null;
@@ -588,4 +624,97 @@ public class FileData {
 	    }
 	    return date;
 	}
+	
+	public boolean idExistsLekovi(String id) {
+		for(String key : lekovi.keySet()) {
+			if(key.equalsIgnoreCase(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean nazivExistsLekovi(String naziv) {
+		for(Lek lek : lekovi.values()) {
+			if((lek.getNaziv()).equalsIgnoreCase(naziv)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean idExistsKorisnici(String id) {
+		for(String key : korisnici.keySet()) {
+			if(key.equalsIgnoreCase(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean emailExistsKorisnici(String email) {
+		for(Korisnik k : korisnici.values()) {
+			if((k.getEmail()).equalsIgnoreCase(email)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean usernameExistsKorisnici(String username) {
+		for(Korisnik k : korisnici.values()) {
+			if((k.getKorisnickoIme()).equalsIgnoreCase(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean loginCheck(Korisnik k1) {
+		for(Korisnik k : korisnici.values()) {
+			if((k.getKorisnickoIme()).equalsIgnoreCase(k1.getKorisnickoIme())) {
+				if(k.getLozinka().equalsIgnoreCase(k1.getLozinka())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean idExistsBolesti(String id) {
+		for(String key : bolesti.keySet()) {
+			if(key.equalsIgnoreCase(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean nazivExistsBolesti(String naziv) {
+		for(Bolest b : bolesti.values()) {
+			if((b.getNaziv()).equalsIgnoreCase(naziv)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean idExistsPregledi(String id) {
+		for(String key : pregledi.keySet()) {
+			if(key.equalsIgnoreCase(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean idExistsPacijenti(String id) {
+		for(String key : pacijenti.keySet()) {
+			if(key.equalsIgnoreCase(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

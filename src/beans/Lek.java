@@ -48,6 +48,25 @@ public class Lek {
 		return "Lek [idLek=" + idLek + ", naziv=" + naziv + ", sastojci=" + sastojci + ", grupaLekova=" + grupaLekova
 				+ "]";
 	}
+	
+	public String toFileString() {
+		
+		String str = idLek + "|" + naziv + "|";
+		StringBuilder sb = new StringBuilder(str);
+		
+		for (Sastojak s : sastojci) {
+			sb.append(s);
+			sb.append(";");
+		}
+		if(!(sastojci.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		sb.append("|");
+		sb.append(grupaLekova);
+		
+		return sb.toString();
+		
+	}
 
 	
 }

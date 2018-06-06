@@ -1,5 +1,7 @@
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Korisnik {
@@ -83,6 +85,26 @@ public class Korisnik {
 				+ ", tipKorisnika=" + tipKorisnika + "]";
 	}
 
+	public String toFileString() {
+		
+		String str = idKorisnik + "|" + ime + "|" + prezime + "|" + email + "|" + convertDateToString(datumRodjenja) + "|"
+		+ korisnickoIme + "|" + lozinka + "|" + tipKorisnika;
+		
+		return str;
+		
+	}
 	
+	private String convertDateToString(Date d)
+	{
+		String dateString = "";
+	    DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
+	    try{
+	        dateString = df.format(d);
+	    }
+	    catch ( Exception ex ){
+	        System.out.println(ex);
+	    }
+	    return dateString;
+	}
 	
 }

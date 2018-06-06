@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -51,6 +54,29 @@ public class FileData {
 		}
 	}
 	
+	public void writeData() {
+		
+		PrintWriter out = null;
+		try {
+			writeLekovi(this.path);
+			writeKorisnici(this.path);
+			writeBolesti(this.path);
+			writePregledi(this.path);
+			writePacijenti(this.path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if ( out != null ) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+		
+	}
+	
 	private void readLekovi(String path) {
 
         try {
@@ -61,7 +87,7 @@ public class FileData {
             Lek lek = new Lek();
             
         	
-			File file = new File(path + "files/lekovi");
+			File file = new File(path + "files/lekoviNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -116,7 +142,7 @@ public class FileData {
         	TipKorisnika tipKorisnika;
         	Korisnik k = new Korisnik();
             
-			File file = new File(path + "files/korisnici");
+			File file = new File(path + "files/korisniciNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -172,7 +198,7 @@ public class FileData {
         	ArrayList<Simptom> specificniSimptomi = new ArrayList<Simptom>();
         	Bolest b = new Bolest();
             
-			File file = new File(path + "files/bolesti");
+			File file = new File(path + "files/bolestiNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -238,7 +264,7 @@ public class FileData {
         	Lek propisanLek = new Lek();
         	Pregled p = new Pregled();
             
-			File file = new File(path + "files/pregledi");
+			File file = new File(path + "files/preglediNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -307,7 +333,7 @@ public class FileData {
         	ArrayList<Lek> alergicanNaLekove = new ArrayList<Lek>();
         	Pacijent p = new Pacijent();
             
-			File file = new File(path + "files/pacijenti");
+			File file = new File(path + "files/pacijentiNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -386,6 +412,168 @@ public class FileData {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+	
+	private void writeLekovi(String path) {
+
+		String total = "";
+		StringBuilder sb = new StringBuilder(total);
+		
+		for(Lek lek : getLekValues()) {
+
+			sb.append(lek.toFileString());
+			sb.append("\n");
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		try {
+		    FileWriter file = new FileWriter(path+"files/lekoviNew");
+		    file.write(sb.toString());
+		    file.flush();
+		    file.close();
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	private void writeKorisnici(String path) {
+
+		String total = "";
+		StringBuilder sb = new StringBuilder(total);
+		
+		for(Korisnik kor : getKorisnikValues()) {
+
+			sb.append(kor.toFileString());
+			sb.append("\n");
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		try {
+		    FileWriter file = new FileWriter(path+"files/korisniciNew");
+		    file.write(sb.toString());
+		    file.flush();
+		    file.close();
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	private void writeBolesti(String path) {
+
+		String total = "";
+		StringBuilder sb = new StringBuilder(total);
+		
+		for(Bolest bol : getBolestValues()) {
+
+			sb.append(bol.toFileString());
+			sb.append("\n");
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		try {
+		    FileWriter file = new FileWriter(path+"files/bolestiNew");
+		    file.write(sb.toString());
+		    file.flush();
+		    file.close();
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	private void writePregledi(String path) {
+
+		String total = "";
+		StringBuilder sb = new StringBuilder(total);
+		
+		for(Pregled pre : getPregledValues()) {
+
+			sb.append(pre.toFileString());
+			sb.append("\n");
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		try {
+		    FileWriter file = new FileWriter(path+"files/preglediNew");
+		    file.write(sb.toString());
+		    file.flush();
+		    file.close();
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	private void writePacijenti(String path) {
+
+		String total = "";
+		StringBuilder sb = new StringBuilder(total);
+		
+		for(Pacijent pac : getPacijentValues()) {
+
+			sb.append(pac.toFileString());
+			sb.append("\n");
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		try {
+		    FileWriter file = new FileWriter(path+"files/pacijentiNew");
+		    file.write(sb.toString());
+		    file.flush();
+		    file.close();
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	/** Vraca kolekciju Lekova. */
+	public Collection<Lek> getLekValues() {
+		return lekovi.values();
+	}
+	/** Vraca kolekciju Korisnika. */
+	public Collection<Korisnik> getKorisnikValues() {
+		return korisnici.values();
+	}
+	/** Vraca kolekciju Bolesti. */
+	public Collection<Bolest> getBolestValues() {
+		return bolesti.values();
+	}
+	/** Vraca kolekciju Pregleda. */
+	public Collection<Pregled> getPregledValues() {
+		return pregledi.values();
+	}
+	/** Vraca kolekciju Pacijenata. */
+	public Collection<Pacijent> getPacijentValues() {
+		return pacijenti.values();
+	}
+	
+	/** Vraca lek na osnovu njegovog id-a. */
+	public Lek getLek(String id) {
+		return lekovi.get(id);
+	}
+	/** Vraca Korisnika na osnovu njegovog id-a. */
+	public Korisnik getKorisnik(String id) {
+		return korisnici.get(id);
+	}
+	/** Vraca Bolest na osnovu njenog id-a. */
+	public Bolest getBolest(String id) {
+		return bolesti.get(id);
+	}
+	/** Vraca Pregled na osnovu njegovog id-a. */
+	public Pregled getPregled(String id) {
+		return pregledi.get(id);
+	}
+	/** Vraca Pacijenta na osnovu njegovog id-a. */
+	public Pacijent getPacijent(String id) {
+		return pacijenti.get(id);
 	}
 	
 	private Date convertStringToDate(String dateString)

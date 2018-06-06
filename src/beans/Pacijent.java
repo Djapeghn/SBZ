@@ -1,5 +1,7 @@
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -84,6 +86,50 @@ public class Pacijent {
 				+ ", alergicanNaLekove=" + alergicanNaLekove + "]";
 	}
 
+	public String toFileString() {
+		
+		String str = idPacijent + "|" + ime + "|" + prezime + "|" + convertDateToString(datumRodjenja) + "|" + pol + "|";
+		StringBuilder sb = new StringBuilder(str);
+		
+		for (Pregled p : pregledi) {
+			sb.append(p.getIdPregleda());
+			sb.append(";");
+		}
+		if(!(pregledi.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		sb.append("|");
+		for (Bolest b : bolesti) {
+			sb.append(b.getIdBolest());
+			sb.append(";");
+		}
+		if(!(bolesti.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		sb.append("|");
+		for (Lek lek : alergicanNaLekove) {
+			sb.append(lek.getIdLek());
+			sb.append(";");
+		}
+		if(!(alergicanNaLekove.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		
+		return sb.toString();
+		
+	}
 	
+	private String convertDateToString(Date d)
+	{
+		String dateString = "";
+	    DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
+	    try{
+	        dateString = df.format(d);
+	    }
+	    catch ( Exception ex ){
+	        System.out.println(ex);
+	    }
+	    return dateString;
+	}
 	
 }

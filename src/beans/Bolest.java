@@ -57,4 +57,27 @@ public class Bolest {
 		return "Bolest [idBolest=" + idBolest + ", naziv=" + naziv + ", grupa=" + grupa + ", opstiSimptomi="
 				+ opstiSimptomi + ", specificniSimptomi=" + specificniSimptomi + "]";
 	}
+	
+	public String toFileString() {
+		
+		String str = idBolest + "|" + naziv + "|" + grupa + "|";
+		StringBuilder sb = new StringBuilder(str);
+		
+		for (Simptom s : opstiSimptomi) {
+			sb.append(s);
+			sb.append(":1");
+			sb.append(";");
+		}
+		for (Simptom s : specificniSimptomi) {
+			sb.append(s);
+			sb.append(":2");
+			sb.append(";");
+		}
+		if(!(opstiSimptomi.isEmpty()) || !(specificniSimptomi.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		
+		return sb.toString();
+		
+	}
 }

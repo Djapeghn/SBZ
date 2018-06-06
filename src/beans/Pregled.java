@@ -1,5 +1,7 @@
 package beans;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -68,6 +70,38 @@ public class Pregled {
 				+ propisanLek + "]";
 	}
 
+	public String toFileString() {
+		
+		String str = idPregleda + "|" + lekar.getIdKorisnik() + "|" + convertDateToString(datumPregleda) + "|";
+		StringBuilder sb = new StringBuilder(str);
+		
+		for (Simptom s : simptomi) {
+			sb.append(s);
+			sb.append(";");
+		}
+		if(!(simptomi.isEmpty())) {
+			sb.deleteCharAt(sb.length()-1);
+		}
+		sb.append("|");
+		sb.append(dijagnostikovanaBolest.getIdBolest());
+		sb.append("|");
+		sb.append(propisanLek.getIdLek());
+		
+		return sb.toString();
+		
+	}
 	
+	private String convertDateToString(Date d)
+	{
+		String dateString = "";
+	    DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
+	    try{
+	        dateString = df.format(d);
+	    }
+	    catch ( Exception ex ){
+	        System.out.println(ex);
+	    }
+	    return dateString;
+	}
 	
 }

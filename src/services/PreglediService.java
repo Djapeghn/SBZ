@@ -57,6 +57,19 @@ public class PreglediService {
 		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Pregled not found\"}").build();
 	}
 	
+	@POST
+	@Path("/deletePregled")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deletePregled(Pregled p) {
+		if(getFileData().idExistsPregledi(p.getIdPregleda())) {
+			getFileData().getPregledi().remove(p.getIdPregleda());
+			getFileData().writeData();
+			return Response.ok().build();
+		}
+		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Error updating Pregled\"}").build();
+	}
+	
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {

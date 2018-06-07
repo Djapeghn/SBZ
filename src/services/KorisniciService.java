@@ -73,6 +73,19 @@ public class KorisniciService {
 		}
 	}
 	
+	@POST
+	@Path("/deleteKorisnik")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteKorisnik(Korisnik k) {
+		if(getFileData().idExistsKorisnici(k.getIdKorisnik())) {
+			getFileData().getKorisnici().remove(k.getIdKorisnik());
+			getFileData().writeData();
+			return Response.ok().build();
+		}
+		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Error updating Korisnik\"}").build();
+	}
+	
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {

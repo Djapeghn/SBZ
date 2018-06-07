@@ -60,6 +60,19 @@ public class BolestiService {
 		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Bolest not found\"}").build();
 	}
 	
+	@POST
+	@Path("/deleteBolest")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteBolest(Bolest b) {
+		if(getFileData().idExistsBolesti(b.getIdBolest())) {
+			getFileData().getBolesti().remove(b.getIdBolest());
+			getFileData().writeData();
+			return Response.ok().build();
+		}
+		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Error updating Bolest\"}").build();
+	}
+	
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {

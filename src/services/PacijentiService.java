@@ -57,6 +57,19 @@ public class PacijentiService {
 		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Pacijent not found\"}").build();
 	}
 	
+	@POST
+	@Path("/deletePacijent")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deletePacijent(Pacijent p) {
+		if(getFileData().idExistsPacijenti(p.getIdPacijent())) {
+			getFileData().getPacijenti().remove(p.getIdPacijent());
+			getFileData().writeData();
+			return Response.ok().build();
+		}
+		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Error updating Pacijent\"}").build();
+	}
+	
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {

@@ -60,6 +60,19 @@ public class LekoviService {
 		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Lek not found\"}").build();
 	}
 	
+	@POST
+	@Path("/deleteLek")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteLek(Lek lek) {
+		if(getFileData().idExistsLekovi(lek.getIdLek())) {
+			getFileData().getLekovi().remove(lek.getIdLek());
+			getFileData().writeData();
+			return Response.ok().build();
+		}
+		return Response.status(Status.NOT_FOUND).entity("{\"msg\":\"Error updating Lek\"}").build();
+	}
+	
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {

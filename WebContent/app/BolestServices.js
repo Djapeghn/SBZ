@@ -1,4 +1,4 @@
-app.factory('BolestFactory', function($http) {
+app.factory('bolestFactory', function($http) {
 	
 	var factory = {};
 	factory.getBolesti = function() {

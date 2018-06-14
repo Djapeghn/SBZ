@@ -1,4 +1,4 @@
-app.factory('LekFactory', function($http) {
+app.factory('lekFactory', function($http) {
 	
 	var factory = {};
 	factory.getLekovi = function() {

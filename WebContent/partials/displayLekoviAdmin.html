@@ -1,0 +1,20 @@
+<div  ng-controller="lekController">
+			<table border="1">
+				<thead>
+					<tr>
+						<td align="center">Id</td>
+						<td align="center">Naziv</td>
+						<td align="center">Grupa</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="lek in lekovi">
+						<td align="center">{{lek.idLek}}</td>
+						<td align="center">{{lek.naziv}}</td>
+						<td align="center">{{lek.grupaLekova}}</td>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="detailViewLekAdmin(lek)">Detaljnije</button></td>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="deleteLek(lek)">Obrisi</button></td>
+					</tr>
+				</tbody>
+			</table>
+</div>

@@ -3,6 +3,9 @@ var app = angular.module('app',['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCooki
 app.config(function($routeProvider) {
 	$routeProvider.when('/',
 	{
-		templateUrl: 'partials/welcome.html'
+		templateUrl: 'partials/displayLekoviAdmin.html'
+	}).when('/displayLekoviAdmin',
+	{
+		templateUrl: 'partials/displayLekoviAdmin.html'
 	})
 });

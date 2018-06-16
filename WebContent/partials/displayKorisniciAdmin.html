@@ -1,0 +1,21 @@
+<div  ng-controller="korisnikController">
+			<table border="1">
+				<thead>
+					<tr>
+						<td align="center">Id</td>
+						<td align="center">Korisnicko ime</td>
+						<td align="center">ime</td>
+						<td align="center">prezime</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="korisnik in korisnici">
+						<td align="center">{{korisnik.idKorisnik}}</td>
+						<td align="center">{{korisnik.korisnickoIme}}</td>
+						<td align="center">{{korisnik.ime}}</td>
+						<td align="center">{{korisnik.prezime}}</td>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="detailViewKorisnikAdmin(korisnik)">Detaljnije</button></td>
+					</tr>
+				</tbody>
+			</table>
+</div>

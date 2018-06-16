@@ -1,0 +1,22 @@
+<div ng-controller="loginController">
+	<form name="loginForm" action="/">
+		<table border="1" cellpadding="5">
+			<div>
+				<tr>
+				<td>Korisnicko ime:</td>
+				<td><input type="text" id="korisnickoIme" name="korisnickoIme" ng-model="korisnik.korisnickoIme"  required></td>
+				</tr>
+				<tr>
+				<td>Lozinka:</td>
+				<td><input type="password" id="lozinka" ng-model="korisnik.lozinka"  required></td>
+				</tr>
+				<tr>
+				<td></td>
+				<!--<td><button type="button" ng-click="submit()">Login</button></td>-->
+				<td><button ng-disabled="loginForm.$invalid" type="button" class='btn btn-default' ng-click="submit()">Uloguj se</button></td>
+				</tr>
+			</div>
+		</table>
+	</form>
+	<p><span ng-show="loginForm.korisnickoIme.$touched && loginForm.korisnickoIme.$invalid">The name is required.</span></p>
+</div>

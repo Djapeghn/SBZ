@@ -1,0 +1,16 @@
+<div ng-controller="korisnikController">
+	<form name="registerForm" action="/">
+		<table border="1" cellpadding="5">
+			<div>
+				<tr><td>Id: </td><td><input type="text" id="idKorisnik" ng-model="korisnik.idKorisnik" required></td></tr>
+				<tr><td>Ime: </td><td><input type="text" id="ime" ng-model="korisnik.ime" required></td></tr>
+				<tr><td>Prezime: </td><td><input type="text" id="prezime" ng-model="korisnik.prezime" required></td></tr>
+				<tr><td>Email: </td><td><input type="text" id="email" ng-model="korisnik.email" required></td></tr>
+				<tr><td>Datum rodjenja: </td><td><quick-datepicker ng-model='datumRodjenjaDatePicker' date-format='MM/dd/yyyy' placeholder='Odaberi datum' disable-timepicker='true' required></quick-datepicker></td></tr>
+				<tr><td>Korisnicko ime: </td><td><input type="text" id="korisnickoIme" ng-model="korisnik.korisnickoIme" required></td></tr>
+				<tr><td>Lozinka: </td><td><input type="password" id="lozinka" ng-model="korisnik.lozinka" required></td></tr>
+				<tr><td></td><td><button ng-disabled="registerForm.$invalid" type="button" class='btn btn-default' ng-click="submit()">Registruj se</button></td></tr>
+			</div>
+		</table>
+	</form>
+</div>

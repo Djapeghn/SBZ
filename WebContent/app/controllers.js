@@ -52,14 +52,21 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 	
 	$scope.detailViewLekAdmin = function(lek) {
 		if(lek==undefined) {
-			$rootScope.detailViewLek = userPersistenceService.getCookieData5();
+			$rootScope.detailViewLek = userPersistenceService.getCookieData2();
 			$location.path('/lekDetailsAdmin');
 		}
 		else {
 			$rootScope.detailViewLek = lek;
-			userPersistenceService.setCookieData5($rootScope.detailViewLek);
+			userPersistenceService.setCookieData2($rootScope.detailViewLek);
 			$location.path('/lekDetailsAdmin');
 		}
+		$scope.sastojciArray = [];
+		for(var i=0; i < $rootScope.detailViewLek.sastojci.length; i++) {
+			
+			$scope.sastojciArray.push($rootScope.detailViewLek.sastojci[i]);
+			
+		}
+		$scope.sastojci = $scope.sastojciArray.join("\n");
 		
 	};
 	
@@ -90,14 +97,19 @@ app.controller('loginController', function($scope, $location, $rootScope, lekFac
 		//userPersistenceService.clearCookieData();
     	if(userPersistenceService.getCookieData()===undefined) {
     		$rootScope.loggedIn = "loggedOut";
+    		if(userPersistenceService.getCookieData2()!=undefined) {
+        		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
+    		}
     	}
     	else if(userPersistenceService.getCookieData().korisnickoIme==="admin") {
     		$rootScope.loggedIn = "loggedInAsAdmin";
     		$rootScope.loggedInKorisnik = userPersistenceService.getCookieData();
+    		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
     	}
     	else {
     		$rootScope.loggedIn = "loggedInAsLekar";
     		$rootScope.loggedInKorisnik = userPersistenceService.getCookieData();
+    		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
     	}
     }
 	init();
@@ -166,5 +178,101 @@ app.controller('loginController', function($scope, $location, $rootScope, lekFac
 	    }
 	    userPersistenceService.setCookieData2($rootScope.vanredneSituacijeZaVolontera);
 	}*/
+	
+});
+
+app.controller('korisnikController', function($scope, korisnikFactory, $http, $rootScope, $window, $location, userPersistenceService) {
+	
+    function init() {
+    	console.log('korisnikController.Init');
+        korisnikFactory.getKorisnici().success(function (data) {
+        	$scope.korisnici = data;
+		});
+    }
+	init();
+	
+	$scope.addKorisnik = function(korisnik) {
+		korisnikFactory.addKorisnik(korisnik).then(function(data) {
+			toast('Korisnik ' + korisnik.korisnickoIme + " registrovan.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Korisnicko ime, email ili id su vec zauzeti.");
+		});	
+	};
+	
+	$scope.modifyKorisnik = function(korisnik) {
+		korisnikFactory.modifyKorisnik(korisnik).then(function(data) {
+			toast("Nalog azuriran.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska prilikom azuriranja.");
+		});	
+	};
+	
+	/*$scope.usernameChanged = function() {
+	    $http.post('/WP/rest/fileData/checkUsername', $scope.volonter.username).then(function (response) {
+	        console.log(response.isValid);
+	    }).catch(function (response) {
+			//toast("Korisnicko ime vec zauzeto.");
+	        notify.warning(response.msg);
+	    });
+	};
+	
+	$scope.emailChanged = function() {
+	    $http.post('/WP/rest/fileData/checkEmail', $scope.volonter.email).then(function (response) {
+	        console.log(response.isValid);
+	    }).catch(function (response) {
+			//toast("Email vec zauzet.");
+	        notify.warning(response.msg);
+	    });
+	};*/
+	
+	$scope.back = function() {
+		//$location.path('/displayVanredneSituacije');
+		$window.history.back();
+	}
+	
+	$scope.submit = function() {
+		//$rootScope je vidljivo globalno
+		$scope.korisnik.idKorisnik;
+		$scope.korisnik.ime;
+		$scope.korisnik.prezime;
+		$scope.korisnik.email;
+		$scope.datumRodjenjaDatePicker;
+		$scope.korisnik.korisnickoIme;
+		$scope.korisnik.lozinka;
+		$scope.korisnik.tipKorisnika = "Lekar";
+		$scope.korisnik.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
+		$scope.addKorisnik($scope.korisnik);
+		$rootScope.loggedIn = "loggedInAsLekar";
+		$rootScope.loggedInKorisnik = $scope.korisnik;
+		userPersistenceService.setCookieData($rootScope.loggedInKorisnik);
+		$location.path('/');
+	}
+	
+	$scope.modify = function() {
+		$scope.modifyKorisnik($rootScope.loggedInKorisnik);
+	}
+	
+	$scope.detailViewKorisnikAdmin = function(korisnik1) {
+		if(korisnik1==undefined) {
+			$rootScope.detailViewKorisnik = userPersistenceService.getCookieData3();
+			$location.path('/korisnikDetailsAdmin');
+		}
+		else {
+			$rootScope.detailViewKorisnik = korisnik1;
+			userPersistenceService.setCookieData3($rootScope.detailViewKorisnik);
+			$location.path('/korisnikDetailsAdmin');
+		}
+	};
+	
+	$scope.modify = function() {
+		$scope.modifyKorisnik($rootScope.detailViewKorisnik);
+	}
+	
+	$scope.modifyAccount = function() {
+		$
+		$scope.modifyKorisnik($rootScope.loggedInKorisnik);
+	}
 	
 });

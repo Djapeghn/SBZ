@@ -1,0 +1,16 @@
+<div ng-controller="lekController">
+	<span>
+		<form name="modifyLekForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center">{{detailViewLek.id}}</td></tr>
+					<tr><td align="center">Naziv: </td><td align="center">{{detailViewLek.naziv}}</td></tr>
+					<tr><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">Sastojci: </td><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">{{$scope.sastojci}}</td></tr>
+					<tr><td align="center">Grupa: </td><td align="center">{{detailViewLek.grupaLekova}}</td></tr>
+					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+						<td align="center"><button ng-disabled="modifyLekForm.$invalid" type="button" class='btn btn-default' ng-click="saveChanges()">Azuriraj</button></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

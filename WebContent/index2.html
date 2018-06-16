@@ -6,14 +6,100 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap-combined.min.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/toast.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/test.css" media="screen" />
-	    <title>Volonteri.com</title>
+		<link rel="stylesheet" type="text/css" href="css/ng-quick-date.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/ng-quick-date-default-theme.css" media="screen" />
+	    <title>CDSS</title>
 	</head>
 	<body ng-controller="loginController" style="background-color: #222233; color: #AACCFF; font-family: Calibri, Myriad;">
 	
 		<header>
     		<h1>cdss.com</h1>
     	</header>
-
+    	
+    	<div ng-switch="loggedIn">
+  			<div ng-switch-when="loggedOut">
+				<div class="topnav">
+					<a ng-href="#/">Pocetna</a>
+					<a ng-href="#/login">Logovanje</a>
+					<a ng-href="#/register">Registracija</a>
+				</div>
+				<!--<header>
+					<div ng-style="navbarHeaderStyle" class="navbar-header">
+						<table border="2">	
+							<div>
+								<tr>
+									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
+									<td><a class="navbar-header-item" ng-href="#/display">Prikazi vanredne situacije</a></td>
+									<td><a class="navbar-header-item" ng-href="#/login">Logovanje</a></td>
+									<td><a class="navbar-header-item" ng-href="#/register">Registracija</a></td>
+								</tr>
+							</div>
+						</table>
+					</div>
+				</header>-->
+  			</div>
+  			<div ng-switch-when="loggedInAsLekar">
+  				<div class="topnav">
+					<a ng-href="#/">Pocetna</a>
+					<a ng-href="#/displayLekovi">Lekovi</a>
+					<a ng-href="#/displayBolesti">Bolesti</a>
+					<a ng-href="#/displayPacijenti">Pacijenti</a>
+					<a ng-href="#/displayMojiPacijenti">Moji Pacijenti</a>
+					<a ng-href="#/addPacijent">Novi Pacijent</a>
+					<a ng-href="#/addPregled">Novi Pregled</a>
+					<a ng-href="#/nalog">Ulogovan: {{loggedInKorisnik.korisnickoIme}}</a>
+					<a ng-href="#/login" ng-click="logout()">Izloguj se</a>
+				</div>
+				<!--<header>
+					<div ng-style="navbarHeaderStyle" class="navbar-header">
+						<table border="2">	
+							<div>
+								<tr>
+									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
+									<td><a class="navbar-header-item" ng-href="#/display">Prikazi vanredne situacije</a></td>
+									<td><a class="navbar-header-item" ng-href="#/displayVanredneSituacijeForVolonter">Moje vanredne situacije</a></td>
+									<td><a class="navbar-header-item" ng-href="#/nalog">Nalog</a></td>
+									<td><a class="navbar-header-item" ng-href="#/login" ng-click="logout()">Izloguj se</a></td>
+								</tr>
+							</div>
+						</table>
+					</div>
+				</header>-->
+  			</div>
+  			<div ng-switch-when="loggedInAsAdmin">
+  				<div class="topnav">
+					<a ng-href="#/">Pocetna</a>
+					<a ng-href="#/displayLekoviAdmin">Lekovi</a>
+					<a ng-href="#/displayBolestiAdmin">Bolesti</a>
+					<a ng-href="#/displayKorisniciAdmin">Korisnici</a>
+					<a ng-href="#/displayPacijentiAdmin">Pacijenti</a>
+					<a ng-href="#/addPacijent">Novi Lek</a>
+					<a ng-href="#/addPregled">Nova Bolest</a>
+					<a ng-href="#/addPacijent">Novi Pacijent</a>
+					<a ng-href="#/addPregled">Novi Pregled</a>
+					<a ng-href="#/nalog">Ulogovan: {{loggedInKorisnik.korisnickoIme}}</a>
+					<a ng-href="#/login" ng-click="logout()">Izloguj se</a>
+				</div>
+				<!--<header>
+					<div ng-style="navbarHeaderStyle" class="navbar-header">
+						<table border="2">	
+							<div>
+								<tr>
+									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
+									<td><a class="navbar-header-item" ng-href="#/displayAdmin">Prikazi vanredne situacije</a></td>
+									<td><a class="navbar-header-item" ng-href="#/displayVolonteriAdmin">Svi volonteri</a></td>
+									<td><a class="navbar-header-item" ng-href="#/displayTeritorijeAdmin">Sve teritorije</a></td>
+									<td><a class="navbar-header-item" ng-href="#/addTeritorija">Dodaj teritoriju</a></td>
+									<td><a class="navbar-header-item" ng-href="#/nalog">Nalog</a></td>
+									<td><a class="navbar-header-item" ng-href="#/login" ng-click="logout()">Izloguj se</a></td>
+								</tr>
+							</div>
+						</table>
+					</div>
+				</header>-->
+  			</div>
+		</div>
+		
 		<div ng-view></div>
 		
 		<footer>
@@ -32,6 +118,7 @@
 		<script src="js/jquery.min.js"></script>
 		<script src="js/toast.js"></script>
 		<script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+		<script src="js/ng-quick-date.js"></script>
 		
 		<!-- Modules -->
 		<script src="app/app.js"></script>

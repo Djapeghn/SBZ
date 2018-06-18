@@ -1,5 +1,6 @@
 package services;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 import javax.servlet.ServletContext;
@@ -76,7 +77,13 @@ public class BolestiService {
 	private FileData getFileData() {
 		FileData fileData = (FileData) ctx.getAttribute("fileData");
 		if (fileData == null) {
-			fileData = new FileData(ctx.getRealPath(""));
+			//fileData = new FileData(ctx.getRealPath(""));
+			try {
+				fileData = new FileData();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ctx.setAttribute("fileData", fileData);
 		} 
 		return fileData;

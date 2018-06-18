@@ -81,6 +81,19 @@ app.config(function($routeProvider) {
 			}
 		},
 		templateUrl: 'partials/lekDetailsAdmin.html'
+	}).when('/addLek',
+	{
+		resolve: {
+			"check": function($location, $rootScope) {
+				if($rootScope.loggedIn=="loggedInAsLekar") {
+					$location.path('/');
+				}
+				else if($rootScope.loggedIn=="loggedOut") {
+					$location.path('/');
+				}
+			}
+		},
+		templateUrl: 'partials/addLek.html'
 	}).when('/displayBolesti',
 	{
 		resolve: {

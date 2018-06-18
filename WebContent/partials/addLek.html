@@ -1,0 +1,37 @@
+<div ng-controller="lekController">
+	<span>
+		<form name="addLekForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center"><input type="text" id="id" ng-model="lek.idLek" required></td></tr>
+					<tr><td align="center">Naziv: </td><td align="center"><input type="text" id="naziv" ng-model="lek.naziv" required></td></tr>
+					<tr><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">Sastojci: </td><td align="center">
+					SASTOJAK0<input type="checkbox" ng-model="sastojak0" name="sastojak" ng-true-value="SASTOJAK0" ng-false-value=""></br>
+					SASTOJAK1<input type="checkbox" ng-model="sastojak1" name="sastojak" ng-true-value="SASTOJAK1" ng-false-value=""></br>
+					SASTOJAK2<input type="checkbox" ng-model="sastojak2" name="sastojak" ng-true-value="SASTOJAK2" ng-false-value=""></br>
+					SASTOJAK3<input type="checkbox" ng-model="sastojak3" name="sastojak" ng-true-value="SASTOJAK3" ng-false-value=""></br>
+					SASTOJAK4<input type="checkbox" ng-model="sastojak4" name="sastojak" ng-true-value="SASTOJAK4" ng-false-value=""></br>
+					SASTOJAK5<input type="checkbox" ng-model="sastojak5" name="sastojak" ng-true-value="SASTOJAK5" ng-false-value=""></br>
+					SASTOJAK6<input type="checkbox" ng-model="sastojak6" name="sastojak" ng-true-value="SASTOJAK6" ng-false-value=""></br>
+					SASTOJAK7<input type="checkbox" ng-model="sastojak7" name="sastojak" ng-true-value="SASTOJAK7" ng-false-value=""></br>
+					SASTOJAK8<input type="checkbox" ng-model="sastojak8" name="sastojak" ng-true-value="SASTOJAK8" ng-false-value=""></br>
+					SASTOJAK9<input type="checkbox" ng-model="sastojak9" name="sastojak" ng-true-value="SASTOJAK9" ng-false-value=""></br>
+					SASTOJAK10<input type="checkbox" ng-model="sastojak10" name="sastojak" ng-true-value="SASTOJAK10" ng-false-value=""></br>
+					SASTOJAK11<input type="checkbox" ng-model="sastojak11" name="sastojak" ng-true-value="SASTOJAK11" ng-false-value=""></br>
+					SASTOJAK12<input type="checkbox" ng-model="sastojak12" name="sastojak" ng-true-value="SASTOJAK12" ng-false-value=""></br>
+					SASTOJAK13<input type="checkbox" ng-model="sastojak13" name="sastojak" ng-true-value="SASTOJAK13" ng-false-value=""></br>
+					</td></tr>
+					<tr><td align="center">Grupa: </td><td align="center">
+						<select id="grupaLekova" ng-model="lek.grupaLekova">
+							<option value="ANTIBIOTICI">Antibiotici</option>
+							<option value="ANALGETICI">Analgetici</option>
+							<option value="OSTALO">Ostalo</option>
+						</select>
+					</td></tr>
+					<tr><td align="center"></td>
+						<td align="center"><button ng-disabled="addLekForm.$invalid" type="button" class='btn btn-default' ng-click="submit()">Azuriraj</button></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

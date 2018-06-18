@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,13 +30,10 @@ public class FileData {
 	private HashMap<String, Pacijent> pacijenti = new HashMap<String,Pacijent>();
 	private String path;
 	
-	public FileData() {
-		super();
-	}
-	public FileData(String path) {
+	public FileData() throws UnsupportedEncodingException {
 		super();
 		BufferedReader in = null;
-		this.path = path;
+		this.path = getPathReal();
 		try {
 			readLekovi(path);
 			readKorisnici(path);
@@ -87,7 +86,7 @@ public class FileData {
             Lek lek = new Lek();
             
         	
-			File file = new File(path + "files/lekoviNew");
+			File file = new File(path + "/files/lekoviNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -142,7 +141,7 @@ public class FileData {
         	TipKorisnika tipKorisnika;
         	Korisnik k = new Korisnik();
             
-			File file = new File(path + "files/korisniciNew");
+			File file = new File(path + "/files/korisniciNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -198,7 +197,7 @@ public class FileData {
         	ArrayList<Simptom> specificniSimptomi = new ArrayList<Simptom>();
         	Bolest b = new Bolest();
             
-			File file = new File(path + "files/bolestiNew");
+			File file = new File(path + "/files/bolestiNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -264,7 +263,7 @@ public class FileData {
         	Lek propisanLek = new Lek();
         	Pregled p = new Pregled();
             
-			File file = new File(path + "files/preglediNew");
+			File file = new File(path + "/files/preglediNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -333,7 +332,7 @@ public class FileData {
         	ArrayList<Lek> alergicanNaLekove = new ArrayList<Lek>();
         	Pacijent p = new Pacijent();
             
-			File file = new File(path + "files/pacijentiNew");
+			File file = new File(path + "/files/pacijentiNew");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readLine = "";
@@ -427,7 +426,7 @@ public class FileData {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		try {
-		    FileWriter file = new FileWriter(path+"files/lekoviNew");
+		    FileWriter file = new FileWriter(path+"/files/lekoviNew");
 		    file.write(sb.toString());
 		    file.flush();
 		    file.close();
@@ -451,7 +450,7 @@ public class FileData {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		try {
-		    FileWriter file = new FileWriter(path+"files/korisniciNew");
+		    FileWriter file = new FileWriter(path+"/files/korisniciNew");
 		    file.write(sb.toString());
 		    file.flush();
 		    file.close();
@@ -475,7 +474,7 @@ public class FileData {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		try {
-		    FileWriter file = new FileWriter(path+"files/bolestiNew");
+		    FileWriter file = new FileWriter(path+"/files/bolestiNew");
 		    file.write(sb.toString());
 		    file.flush();
 		    file.close();
@@ -499,7 +498,7 @@ public class FileData {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		try {
-		    FileWriter file = new FileWriter(path+"files/preglediNew");
+		    FileWriter file = new FileWriter(path+"/files/preglediNew");
 		    file.write(sb.toString());
 		    file.flush();
 		    file.close();
@@ -523,7 +522,7 @@ public class FileData {
 		}
 		sb.deleteCharAt(sb.length()-1);
 		try {
-		    FileWriter file = new FileWriter(path+"files/pacijentiNew");
+		    FileWriter file = new FileWriter(path+"/files/pacijentiNew");
 		    file.write(sb.toString());
 		    file.flush();
 		    file.close();
@@ -716,5 +715,25 @@ public class FileData {
 		}
 		return false;
 	}
+	
+	public String getPathReal() throws UnsupportedEncodingException {
+
+		String path = this.getClass().getClassLoader().getResource("").getPath();
+		String fullPath = URLDecoder.decode(path, "UTF-8");
+		String pathArr[] = fullPath.split("/WEB-INF/classes/");
+		System.out.println(fullPath);
+		System.out.println(pathArr[0]);
+		fullPath = pathArr[0];
+		
+		return fullPath;
+		/*String reponsePath = "";
+
+		// to read a file from webcontent
+
+		reponsePath = new File(fullPath).getPath() + File.separatorChar + "newfile.txt";
+
+		return reponsePath;*/
+
+		}
 	
 }

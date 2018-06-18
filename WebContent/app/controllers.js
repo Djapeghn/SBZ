@@ -1,6 +1,30 @@
 app.controller('lekController', function($scope, lekFactory, $http, $rootScope, $location, $window, userPersistenceService) {
 	
 	$scope.lekovi = [{idLek:"123", naziv:"naziv1", grupaLekova:"antibiotici"}];
+	/*$scope.addLekSastojciOptions = [{label:"SASTOJAK0",value:"SASTOJAK0"}, {label:"SASTOJAK1",value:"SASTOJAK1"}, {label:"SASTOJAK2",value:"SASTOJAK2"},
+		{label:"SASTOJAK3",value:"SASTOJAK3"}, {label:"SASTOJAK4",value:"SASTOJAK4"}, {label:"SASTOJAK5",value:"SASTOJAK5"},
+		{label:"SASTOJAK6",value:"SASTOJAK6"}, {label:"SASTOJAK7",value:"SASTOJAK7"}, {label:"SASTOJAK8",value:"SASTOJAK8"},
+		{label:"SASTOJAK9",value:"SASTOJAK9"}, {label:"SASTOJAK10",value:"SASTOJAK10"}, {label:"SASTOJAK11",value:"SASTOJAK11"},
+		{label:"SASTOJAK12",value:"SASTOJAK12"}, {label:"SASTOJAK13",value:"SASTOJAK13"}];
+	
+	$scope.removeOption = function(text){
+		  $scope.addLekSastojciOptions.
+		  $scope.options.push({label:text,value:text});
+		}*/
+	$scope.sastojak0 = "";
+	$scope.sastojak1 = "";
+	$scope.sastojak2 = "";
+	$scope.sastojak3 = "";
+	$scope.sastojak4 = "";
+	$scope.sastojak5 = "";
+	$scope.sastojak6 = "";
+	$scope.sastojak7 = "";
+	$scope.sastojak8 = "";
+	$scope.sastojak9 = "";
+	$scope.sastojak10 = "";
+	$scope.sastojak11 = "";
+	$scope.sastojak12 = "";
+	$scope.sastojak13 = "";
 	
     function init() {
     	console.log('lekController.Init');
@@ -60,13 +84,19 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 			userPersistenceService.setCookieData2($rootScope.detailViewLek);
 			$location.path('/lekDetailsAdmin');
 		}
-		$scope.sastojciArray = [];
-		for(var i=0; i < $rootScope.detailViewLek.sastojci.length; i++) {
-			
-			$scope.sastojciArray.push($rootScope.detailViewLek.sastojci[i]);
-			
+		
+	};
+	
+	$scope.detailViewLekLekar = function(lek) {
+		if(lek==undefined) {
+			$rootScope.detailViewLek = userPersistenceService.getCookieData2();
+			$location.path('/lekDetails');
 		}
-		$scope.sastojci = $scope.sastojciArray.join("\n");
+		else {
+			$rootScope.detailViewLek = lek;
+			userPersistenceService.setCookieData2($rootScope.detailViewLek);
+			$location.path('/lekDetails');
+		}
 		
 	};
 	
@@ -78,14 +108,29 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 	$scope.saveChanges = function() {
 		$scope.modifyLek($rootScope.detailViewLek);
 		$location.path('/displayLekoviAdmin');
+		$scope.refresh();
 	};
 	
 	$scope.submit = function() {
 		//$rootScope je vidljivo globalno
 		$scope.lek.idLek;
 		$scope.lek.naziv;
-		$scope.lek.sastojci;
+		$scope.lek.sastojci = [];
+		
+		$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
+			$scope.sastojak6,$scope.sastojak7,$scope.sastojak8,$scope.sastojak9,$scope.sastojak10,$scope.sastojak11,$scope.sastojak12,
+			$scope.sastojak13];
+		
+		for(var i=0; i<$scope.sviSastojciMoguci.length; i++) {
+			if($scope.sviSastojciMoguci[i]!=="") {
+				$scope.lek.sastojci.push($scope.sviSastojciMoguci[i]);
+			}
+		}
+		
 		$scope.lek.grupaLekova;
+		$scope.addLek($scope.lek);
+		$location.path('/displayLekoviAdmin');
+		$scope.refresh();
 	};
 });
 
@@ -194,6 +239,10 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 	$scope.addKorisnik = function(korisnik) {
 		korisnikFactory.addKorisnik(korisnik).then(function(data) {
 			toast('Korisnik ' + korisnik.korisnickoIme + " registrovan.");
+			$rootScope.loggedIn = "loggedInAsLekar";
+			$rootScope.loggedInKorisnik = $scope.korisnik;
+			userPersistenceService.setCookieData($rootScope.loggedInKorisnik);
+			$location.path('/');
 		}).catch(function (response) {
 			//$notify.error(response.msg);
 			toast("Korisnicko ime, email ili id su vec zauzeti.");
@@ -244,10 +293,6 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 		$scope.korisnik.tipKorisnika = "Lekar";
 		$scope.korisnik.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
 		$scope.addKorisnik($scope.korisnik);
-		$rootScope.loggedIn = "loggedInAsLekar";
-		$rootScope.loggedInKorisnik = $scope.korisnik;
-		userPersistenceService.setCookieData($rootScope.loggedInKorisnik);
-		$location.path('/');
 	}
 	
 	$scope.modify = function() {

@@ -5,7 +5,16 @@
 				<div>
 					<tr><td align="center">Id: </td><td align="center"><input type="text" id="id" ng-model="lek.idLek" required></td></tr>
 					<tr><td align="center">Naziv: </td><td align="center"><input type="text" id="naziv" ng-model="lek.naziv" required></td></tr>
-					<tr><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">Sastojci: </td><td align="center">
+					<tr>
+						<td align="center">Sastojci:</td>
+						<td align="center">
+							<select style="float: left; clear: both;" ng-repeat="field in sastojciFields.fields track by $index" ng-model='sastojciFields.fields[$index]'>
+								<option ng-repeat="sastojak in placeholderLek.sastojci" value="{{sastojak}}">{{sastojak}}</option>
+							</select></br>
+							<!--<input ng-repeat="field in simptomiFields.fields track by $index" type='text' ng-model='simptomiFields.fields[$index]'></td>-->
+						<td><button type='button' ng-click="addSastojciField()">Novi</button></td>
+					</tr>
+					<!--<tr><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">Sastojci: </td><td align="center">
 					SASTOJAK0<input type="checkbox" ng-model="sastojak0" name="sastojak" ng-true-value="SASTOJAK0" ng-false-value=""></br>
 					SASTOJAK1<input type="checkbox" ng-model="sastojak1" name="sastojak" ng-true-value="SASTOJAK1" ng-false-value=""></br>
 					SASTOJAK2<input type="checkbox" ng-model="sastojak2" name="sastojak" ng-true-value="SASTOJAK2" ng-false-value=""></br>
@@ -20,7 +29,7 @@
 					SASTOJAK11<input type="checkbox" ng-model="sastojak11" name="sastojak" ng-true-value="SASTOJAK11" ng-false-value=""></br>
 					SASTOJAK12<input type="checkbox" ng-model="sastojak12" name="sastojak" ng-true-value="SASTOJAK12" ng-false-value=""></br>
 					SASTOJAK13<input type="checkbox" ng-model="sastojak13" name="sastojak" ng-true-value="SASTOJAK13" ng-false-value=""></br>
-					</td></tr>
+					</td></tr>-->
 					<tr><td align="center">Grupa: </td><td align="center">
 						<select id="grupaLekova" ng-model="lek.grupaLekova">
 							<option value="ANTIBIOTICI">Antibiotici</option>

@@ -31,6 +31,9 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
         lekFactory.getLekovi().success(function (data2) {
         	$scope.lekovi = data2;
 		});
+        lekFactory.getAllSastojci().success(function (data3) {
+        	$scope.placeholderLek = data3;
+		});
     }
     
 	init();
@@ -41,6 +44,12 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 	        	  $scope.lekovi = data2;
 	          });
 	}
+	
+	  $scope.sastojciFields = { fields: [] };
+
+	  $scope.addSastojciField = function() {
+	    $scope.sastojciFields.fields.push('');
+	  }
 	
 	$scope.addLek = function(lek) {
 		lekFactory.addLek(lek).then(function(data) {
@@ -117,7 +126,13 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 		$scope.lek.naziv;
 		$scope.lek.sastojci = [];
 		
-		$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
+		for(var i=0; i<$scope.sastojciFields.fields.length; i++) {
+			if($scope.sastojciFields.fields[i]!=="") {
+				$scope.lek.sastojci.push($scope.sastojciFields.fields[i]);
+			}
+		}
+		
+		/*$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
 			$scope.sastojak6,$scope.sastojak7,$scope.sastojak8,$scope.sastojak9,$scope.sastojak10,$scope.sastojak11,$scope.sastojak12,
 			$scope.sastojak13];
 		
@@ -125,7 +140,7 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 			if($scope.sviSastojciMoguci[i]!=="") {
 				$scope.lek.sastojci.push($scope.sviSastojciMoguci[i]);
 			}
-		}
+		}*/
 		
 		$scope.lek.grupaLekova;
 		$scope.addLek($scope.lek);
@@ -324,21 +339,6 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 
 app.controller('bolestController', function($scope, bolestFactory, $http, $rootScope, $location, $window, userPersistenceService) {
 	
-	$scope.sastojak0 = "";
-	$scope.sastojak1 = "";
-	$scope.sastojak2 = "";
-	$scope.sastojak3 = "";
-	$scope.sastojak4 = "";
-	$scope.sastojak5 = "";
-	$scope.sastojak6 = "";
-	$scope.sastojak7 = "";
-	$scope.sastojak8 = "";
-	$scope.sastojak9 = "";
-	$scope.sastojak10 = "";
-	$scope.sastojak11 = "";
-	$scope.sastojak12 = "";
-	$scope.sastojak13 = "";
-	
     function init() {
     	console.log('bolestController.Init');
         bolestFactory.getBolesti().success(function (data2) {
@@ -465,26 +465,13 @@ app.controller('bolestController', function($scope, bolestFactory, $http, $rootS
 			if($scope.opstiSimptomiFields.fields[i]!=="") {
 				$scope.bolest.opstiSimptomi.push($scope.opstiSimptomiFields.fields[i]);
 			}
-			//$scope.bolest.opstiSimptomi.push($scope.opstiSimptomiFields.fields[i]);
 		}
 		for(var i=0; i<$scope.specificniSimptomiFields.fields.length; i++) {
 			if($scope.specificniSimptomiFields.fields[i]!=="") {
 				$scope.bolest.specificniSimptomi.push($scope.specificniSimptomiFields.fields[i]);
 			}
-			//$scope.bolest.specificniSimptomi.push($scope.specificniSimptomiFields.fields[i]);
 		}
 		
-		/*$scope.bolest.sastojci = [];
-		
-		$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
-			$scope.sastojak6,$scope.sastojak7,$scope.sastojak8,$scope.sastojak9,$scope.sastojak10,$scope.sastojak11,$scope.sastojak12,
-			$scope.sastojak13];
-		
-		for(var i=0; i<$scope.sviSastojciMoguci.length; i++) {
-			if($scope.sviSastojciMoguci[i]!=="") {
-				$scope.bolest.sastojci.push($scope.sviSastojciMoguci[i]);
-			}
-		}*/
 		
 		$scope.addBolest($scope.bolest);
 		$location.path('/displayBolestiAdmin');

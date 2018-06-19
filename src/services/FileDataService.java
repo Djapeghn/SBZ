@@ -37,6 +37,13 @@ public class FileDataService {
 		return getFileData().getLekValues();
 	}
 	
+	@GET
+	@Path("/getAllSastojci")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Lek getAllSastojci() {
+		return getFileData().getAllSastojci();
+	}
+	
 	@POST
 	@Path("/addLek")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +91,13 @@ public class FileDataService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Bolest> getBolesti() {
 		return getFileData().getBolestValues();
+	}
+	
+	@GET
+	@Path("/getAllSimptomi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Bolest getAllSimptomi() {
+		return getFileData().getAllSimptomi();
 	}
 	
 	@POST

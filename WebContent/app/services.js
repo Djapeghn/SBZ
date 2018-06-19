@@ -4,6 +4,10 @@ app.factory('lekFactory', function($http) {
 	factory.getLekovi = function() {
 		return $http.get('/CDSS/rest/fileData/getLekovi');
 	};
+	
+	factory.getAllSastojci = function() {
+		return $http.get('/CDSS/rest/fileData/getAllSastojci');
+	};
 
 	factory.addLek = function(lek) {
 		return $http.post('/CDSS/rest/fileData/addLek', lek);
@@ -26,6 +30,10 @@ app.factory('bolestFactory', function($http) {
 	var factory = {};
 	factory.getBolesti = function() {
 		return $http.get('/CDSS/rest/fileData/getBolesti');
+	};
+	
+	factory.getAllSimptomi = function() {
+		return $http.get('/CDSS/rest/fileData/getAllSimptomi');
 	};
 
 	factory.addBolest = function(Bolest) {
@@ -147,11 +155,20 @@ app.factory("userPersistenceService", [
 				detailViewKorisnik = $cookieStore.get("detailViewKorisnik1");
 				return detailViewKorisnik;
 			},
+			setCookieData4: function(detailViewBolest) {
+				detailViewBolest1 = detailViewBolest;
+				$cookieStore.put("detailViewBolest1", detailViewBolest);
+			},
+			getCookieData4: function() {
+				detailViewBolest = $cookieStore.get("detailViewBolest1");
+				return detailViewBolest;
+			},
 			clearCookieData: function() {
 				userName = "";
 				$cookieStore.remove("userName");
 				$cookieStore.remove("detailViewLek1");
 				$cookieStore.remove("detailViewKorisnik1");
+				$cookieStore.remove("detailViewBolest1");
 			}
 		}
 	}

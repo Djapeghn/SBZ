@@ -1,0 +1,18 @@
+<div ng-controller="bolestController">
+	<span>
+		<form name="modifyBolestForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center">{{detailViewBolest.idBolest}}</td></tr>
+					<tr><td align="center">Naziv: </td><td align="center">{{detailViewBolest.naziv}}</td></tr>
+					<tr><td align="center">Grupa: </td><td align="center">{{detailViewBolest.grupa}}</td></tr>
+					<tr><td rowspan="2" align="center">Simptomi: </td><td>Opsti:</td><td>Specificni:</td></tr>
+					<tr><td align="center"><div ng-repeat="simptom1 in detailViewBolest.opstiSimptomi">{{simptom1}}</div></td>
+						<td align="center"><div ng-repeat="simptom2 in detailViewBolest.specificniSimptomi">{{simptom2}}</div></td></tr>
+					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+						<td align="center"></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

@@ -6,7 +6,13 @@
 					<tr><td align="center">Id: </td><td align="center">{{detailViewLek.idLek}}</td></tr>
 					<tr><td align="center">Naziv: </td><td align="center"><input type="text" id="naziv" ng-model="detailViewLek.naziv" required></td></tr>
 					<tr><td rowspan="{{$rootScope.detailViewLek.sastojci.length}}" align="center">Sastojci: </td><td align="center"><div ng-repeat="sastojak in detailViewLek.sastojci">{{sastojak}}</div></td></tr>
-					<tr><td align="center">Grupa: </td><td align="center">{{detailViewLek.grupaLekova}}</td></tr>
+					<tr><td align="center">Grupa: </td><td align="center">
+						<select id="grupaLekova" ng-model="detailViewLek.grupaLekova">
+							<option value="ANTIBIOTICI">Antibiotici</option>
+							<option value="ANALGETICI">Analgetici</option>
+							<option value="OSTALO">Ostalo</option>
+						</select>
+					</td></tr>
 					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
 						<td align="center"><button ng-disabled="modifyLekForm.$invalid" type="button" class='btn btn-default' ng-click="saveChanges()">Azuriraj</button></td></tr>
 				</div>

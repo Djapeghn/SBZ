@@ -148,6 +148,19 @@ app.config(function($routeProvider) {
 			}
 		},
 		templateUrl: 'partials/bolestDetailsAdmin.html'
+	}).when('/addBolest',
+	{
+		resolve: {
+			"check": function($location, $rootScope) {
+				if($rootScope.loggedIn=="loggedInAsLekar") {
+					$location.path('/');
+				}
+				else if($rootScope.loggedIn=="loggedOut") {
+					$location.path('/');
+				}
+			}
+		},
+		templateUrl: 'partials/addBolest.html'
 	}).when('/displayPacijenti',
 	{
 		resolve: {

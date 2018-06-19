@@ -321,3 +321,173 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 	}
 	
 });
+
+app.controller('bolestController', function($scope, bolestFactory, $http, $rootScope, $location, $window, userPersistenceService) {
+	
+	$scope.sastojak0 = "";
+	$scope.sastojak1 = "";
+	$scope.sastojak2 = "";
+	$scope.sastojak3 = "";
+	$scope.sastojak4 = "";
+	$scope.sastojak5 = "";
+	$scope.sastojak6 = "";
+	$scope.sastojak7 = "";
+	$scope.sastojak8 = "";
+	$scope.sastojak9 = "";
+	$scope.sastojak10 = "";
+	$scope.sastojak11 = "";
+	$scope.sastojak12 = "";
+	$scope.sastojak13 = "";
+	
+    function init() {
+    	console.log('bolestController.Init');
+        bolestFactory.getBolesti().success(function (data2) {
+        	$scope.bolesti = data2;
+		});
+        bolestFactory.getAllSimptomi().success(function (data3) {
+        	$scope.placeholderBolest = data3;
+		});
+    }
+    
+	init();
+	
+	$scope.refresh = function(){
+		bolestFactory.getBolesti()
+	          .success(function(data2){
+	        	  $scope.bolesti = data2;
+	          });
+	}
+	
+	  $scope.opstiSimptomiFields = { fields: [] };
+	  $scope.specificniSimptomiFields = { fields: [] };
+
+	  $scope.addOpstiSimptomiField = function() {
+	    $scope.opstiSimptomiFields.fields.push('');
+	  }
+	  $scope.addSpecificniSimptomiField = function() {
+		    $scope.specificniSimptomiFields.fields.push('');
+	  }
+	
+	$scope.addBolest = function(bolest) {
+		bolestFactory.addBolest(bolest).then(function(data) {
+			$scope.refresh();
+			//$location.path('/displayTeritorijeAdmin');
+			toast('Bolest ' + bolest.naziv + " dodata.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Bolest sa unetim nazivom vec postoji.");
+		});	
+	};
+	
+	$scope.modifyBolest = function(bolest) {
+		bolestFactory.modifyBolest(bolest).then(function(data) {
+			$scope.refresh();
+			//$location.path('/displayTeritorijeAdmin');
+			toast('Bolest ' + bolest.naziv + " azurirana.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska pri azuriranju bolesti.");
+		});	
+	};
+	
+	$scope.deleteBolest = function(bolest) {
+		bolestFactory.deleteBolest(bolest).then(function(data) {
+			$scope.refresh();
+			toast('Bolest ' + bolest.naziv + " obrisana.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska pri brisanju bolesti.");
+		});	
+	};
+	
+	$scope.detailViewBolestAdmin = function(bolest) {
+		if(bolest==undefined) {
+			$rootScope.detailViewBolest = userPersistenceService.getCookieData4();
+			$location.path('/bolestDetailsAdmin');
+		}
+		else {
+			$rootScope.detailViewBolest = bolest;
+			userPersistenceService.setCookieData4($rootScope.detailViewBolest);
+			$location.path('/bolestDetailsAdmin');
+		}
+		
+	};
+	
+	$scope.detailViewBolestLekar = function(bolest) {
+		if(bolest==undefined) {
+			$rootScope.detailViewBolest = userPersistenceService.getCookieData4();
+			/*$rootScope.userFriendlyDisplayOpstiSimptomi = $rootScope.detailViewBolest.opstiSimptomi;
+			$rootScope.userFriendlyDisplaySpecificniSimptomi = $rootScope.detailViewBolest.specificniSimptomi;
+			for(var i=0; i<$rootScope.userFriendlyDisplayOpstiSimptomi.length; i++) {
+				$rootScope.userFriendlyDisplayOpstiSimptomi[i] = $rootScope.userFriendlyDisplayOpstiSimptomi[i].replace("_","/\s/g");
+			}
+			for(var i=0; i<$rootScope.userFriendlyDisplaySpecificniSimptomi.length; i++) {
+				$rootScope.userFriendlyDisplaySpecificniSimptomi[i] = $rootScope.userFriendlyDisplaySpecificniSimptomi[i].replace("_","/\s/g");
+			}*/
+			$location.path('/bolestDetails');
+		}
+		else {
+			$rootScope.detailViewBolest = bolest;
+			userPersistenceService.setCookieData4($rootScope.detailViewBolest);
+			/*$rootScope.userFriendlyDisplayOpstiSimptomi = $rootScope.detailViewBolest.opstiSimptomi;
+			$rootScope.userFriendlyDisplaySpecificniSimptomi = $rootScope.detailViewBolest.specificniSimptomi;
+			for(var i=0; i<$rootScope.userFriendlyDisplayOpstiSimptomi.length; i++) {
+				$rootScope.userFriendlyDisplayOpstiSimptomi[i] = $rootScope.userFriendlyDisplayOpstiSimptomi[i].replace("_","/\s/g");
+			}
+			for(var i=0; i<$rootScope.userFriendlyDisplaySpecificniSimptomi.length; i++) {
+				$rootScope.userFriendlyDisplaySpecificniSimptomi[i] = $rootScope.userFriendlyDisplaySpecificniSimptomi[i].replace("_","/\s/g");
+			}*/
+			$location.path('/bolestDetails');
+		}
+		
+	};
+	
+	$scope.back = function() {
+		$location.path('/displayBolestiAdmin');
+		//$window.history.back();
+	};
+	
+	$scope.saveChanges = function() {
+		$scope.modifyBolest($rootScope.detailViewBolest);
+		$location.path('/displayBolestiAdmin');
+		$scope.refresh();
+	};
+	
+	$scope.submit = function() {
+		//$rootScope je vidljivo globalno
+		$scope.bolest.idBolest;
+		$scope.bolest.naziv;
+		$scope.bolest.grupa;
+		$scope.bolest.opstiSimptomi = [];
+		$scope.bolest.specificniSimptomi = [];
+		
+		for(var i=0; i<$scope.opstiSimptomiFields.fields.length; i++) {
+			if($scope.opstiSimptomiFields.fields[i]!=="") {
+				$scope.bolest.opstiSimptomi.push($scope.opstiSimptomiFields.fields[i]);
+			}
+			//$scope.bolest.opstiSimptomi.push($scope.opstiSimptomiFields.fields[i]);
+		}
+		for(var i=0; i<$scope.specificniSimptomiFields.fields.length; i++) {
+			if($scope.specificniSimptomiFields.fields[i]!=="") {
+				$scope.bolest.specificniSimptomi.push($scope.specificniSimptomiFields.fields[i]);
+			}
+			//$scope.bolest.specificniSimptomi.push($scope.specificniSimptomiFields.fields[i]);
+		}
+		
+		/*$scope.bolest.sastojci = [];
+		
+		$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
+			$scope.sastojak6,$scope.sastojak7,$scope.sastojak8,$scope.sastojak9,$scope.sastojak10,$scope.sastojak11,$scope.sastojak12,
+			$scope.sastojak13];
+		
+		for(var i=0; i<$scope.sviSastojciMoguci.length; i++) {
+			if($scope.sviSastojciMoguci[i]!=="") {
+				$scope.bolest.sastojci.push($scope.sviSastojciMoguci[i]);
+			}
+		}*/
+		
+		$scope.addBolest($scope.bolest);
+		$location.path('/displayBolestiAdmin');
+		$scope.refresh();
+	};
+});

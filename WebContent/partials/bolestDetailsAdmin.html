@@ -1,0 +1,24 @@
+<div ng-controller="bolestController">
+	<span>
+		<form name="modifyBolestForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center">{{detailViewBolest.idBolest}}</td></tr>
+					<tr><td align="center">Naziv: </td><td align="center"><input type="text" id="naziv" ng-model="detailViewBolest.naziv" required></td></tr>
+					<tr><td align="center">Grupa: </td><td align="center">
+						<select id="grupa" ng-model="detailViewBolest.grupa">
+							<option value="PRVA">Prva</option>
+							<option value="DRUGA">Druga</option>
+							<option value="TRECA">Treca</option>
+						</select>
+					</td></tr>
+					<tr><td rowspan="2" align="center">Simptomi: </td><td>Opsti:</td><td>Specificni:</td></tr>
+					<tr><td align="center"><div ng-repeat="simptom1 in detailViewBolest.opstiSimptomi">{{simptom1}}</div></td>
+						<td align="center"><div ng-repeat="simptom2 in detailViewBolest.specificniSimptomi">{{simptom2}}</div></td></tr>
+					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+						<td align="center"><button ng-disabled="modifyLekForm.$invalid" type="button" class='btn btn-default' ng-click="saveChanges()">Azuriraj</button></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

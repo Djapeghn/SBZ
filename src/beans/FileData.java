@@ -216,14 +216,16 @@ public class FileData {
 					
 					String[] splittedSimptomString = simptomString.split(":");
 					
-					if(splittedSimptomString[1].equals("1")) {
-						
-						opstiSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
-						
-					} else {
-						
-						specificniSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
-						
+					if(splittedSimptomString.length>1) {
+						if(splittedSimptomString[1].equals("1")) {
+							
+							opstiSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
+							
+						} else {
+							
+							specificniSimptomi.add(Simptom.valueOf(splittedSimptomString[0]));
+							
+						}
 					}
 				}
 				
@@ -735,5 +737,29 @@ public class FileData {
 		return reponsePath;*/
 
 		}
+	
+	public Bolest getAllSimptomi() {
+		
+		Simptom[] simptoms = Simptom.values();
+		ArrayList<Simptom> simptoms1 = new ArrayList<Simptom>();
+		for(int i=0; i<simptoms.length; i++) {
+			simptoms1.add(simptoms[i]);
+		}
+		Bolest b = new Bolest("placeholder","placeholder",GrupaBolesti.PRVA,simptoms1,simptoms1);
+		return b;
+		
+	}
+	
+	public Lek getAllSastojci() {
+		
+		Sastojak[] sastojaks = Sastojak.values();
+		ArrayList<Sastojak> sastojaks1 = new ArrayList<Sastojak>();
+		for(int i=0; i<sastojaks.length; i++) {
+			sastojaks1.add(sastojaks[i]);
+		}
+		Lek le = new Lek("placeholder","placeholder",sastojaks1,GrupaLekova.ANTIBIOTICI);
+		return le;
+		
+	}
 	
 }

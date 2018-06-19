@@ -161,6 +161,16 @@ app.config(function($routeProvider) {
 			}
 		},
 		templateUrl: 'partials/addBolest.html'
+	}).when('/azurirajNalog',
+	{
+		resolve: {
+			"check": function($location, $rootScope) {
+				if($rootScope.loggedIn=="loggedOut") {
+					$location.path('/');
+				}
+			}
+		},
+		templateUrl: 'partials/azurirajNalog.html'
 	}).when('/displayPacijenti',
 	{
 		resolve: {

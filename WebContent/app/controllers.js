@@ -1,30 +1,6 @@
 app.controller('lekController', function($scope, lekFactory, $http, $rootScope, $location, $window, userPersistenceService) {
 	
 	$scope.lekovi = [{idLek:"123", naziv:"naziv1", grupaLekova:"antibiotici"}];
-	/*$scope.addLekSastojciOptions = [{label:"SASTOJAK0",value:"SASTOJAK0"}, {label:"SASTOJAK1",value:"SASTOJAK1"}, {label:"SASTOJAK2",value:"SASTOJAK2"},
-		{label:"SASTOJAK3",value:"SASTOJAK3"}, {label:"SASTOJAK4",value:"SASTOJAK4"}, {label:"SASTOJAK5",value:"SASTOJAK5"},
-		{label:"SASTOJAK6",value:"SASTOJAK6"}, {label:"SASTOJAK7",value:"SASTOJAK7"}, {label:"SASTOJAK8",value:"SASTOJAK8"},
-		{label:"SASTOJAK9",value:"SASTOJAK9"}, {label:"SASTOJAK10",value:"SASTOJAK10"}, {label:"SASTOJAK11",value:"SASTOJAK11"},
-		{label:"SASTOJAK12",value:"SASTOJAK12"}, {label:"SASTOJAK13",value:"SASTOJAK13"}];
-	
-	$scope.removeOption = function(text){
-		  $scope.addLekSastojciOptions.
-		  $scope.options.push({label:text,value:text});
-		}*/
-	$scope.sastojak0 = "";
-	$scope.sastojak1 = "";
-	$scope.sastojak2 = "";
-	$scope.sastojak3 = "";
-	$scope.sastojak4 = "";
-	$scope.sastojak5 = "";
-	$scope.sastojak6 = "";
-	$scope.sastojak7 = "";
-	$scope.sastojak8 = "";
-	$scope.sastojak9 = "";
-	$scope.sastojak10 = "";
-	$scope.sastojak11 = "";
-	$scope.sastojak12 = "";
-	$scope.sastojak13 = "";
 	
     function init() {
     	console.log('lekController.Init');
@@ -132,16 +108,6 @@ app.controller('lekController', function($scope, lekFactory, $http, $rootScope, 
 			}
 		}
 		
-		/*$scope.sviSastojciMoguci = [$scope.sastojak0,$scope.sastojak1,$scope.sastojak2,$scope.sastojak3,$scope.sastojak4,$scope.sastojak5,
-			$scope.sastojak6,$scope.sastojak7,$scope.sastojak8,$scope.sastojak9,$scope.sastojak10,$scope.sastojak11,$scope.sastojak12,
-			$scope.sastojak13];
-		
-		for(var i=0; i<$scope.sviSastojciMoguci.length; i++) {
-			if($scope.sviSastojciMoguci[i]!=="") {
-				$scope.lek.sastojci.push($scope.sviSastojciMoguci[i]);
-			}
-		}*/
-		
 		$scope.lek.grupaLekova;
 		$scope.addLek($scope.lek);
 		$location.path('/displayLekoviAdmin');
@@ -178,7 +144,7 @@ app.controller('loginController', function($scope, $location, $rootScope, lekFac
 	$scope.findLoggedIn = function(username) {
 		for(var i=0; i < $scope.korisnici.length; i++) {
 			if($scope.korisnici[i].korisnickoIme===$scope.korisnik.korisnickoIme) {
-				$rootScope.loggedInKorisnik.idkorisnik = $scope.korisnici[i].idKorisnik;
+				$rootScope.loggedInKorisnik.idKorisnik = $scope.korisnici[i].idKorisnik;
 				$rootScope.loggedInKorisnik.ime = $scope.korisnici[i].ime;
 				$rootScope.loggedInKorisnik.prezime = $scope.korisnici[i].prezime;
 				$rootScope.loggedInKorisnik.email = $scope.korisnici[i].email;
@@ -310,8 +276,10 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 		$scope.addKorisnik($scope.korisnik);
 	}
 	
-	$scope.modify = function() {
-		$scope.modifyKorisnik($rootScope.loggedInKorisnik);
+	$scope.modifyAccount = function() {
+		$scope.datumRodjenjaDatePicker;
+		$rootScope.loggedInKorisnik.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
+			$scope.modifyKorisnik($rootScope.loggedInKorisnik);
 	}
 	
 	$scope.detailViewKorisnikAdmin = function(korisnik1) {
@@ -328,11 +296,6 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 	
 	$scope.modify = function() {
 		$scope.modifyKorisnik($rootScope.detailViewKorisnik);
-	}
-	
-	$scope.modifyAccount = function() {
-		$
-		$scope.modifyKorisnik($rootScope.loggedInKorisnik);
 	}
 	
 });

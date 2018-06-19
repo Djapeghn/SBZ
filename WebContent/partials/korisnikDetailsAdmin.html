@@ -1,0 +1,16 @@
+<div  ng-controller="korisnikController">
+		<form name="korisnikDetailsAdminForm" action="/">
+			<table border="1" cellpadding="5">
+				<tr><td>Id: </td><td>{{detailViewKorisnik.idKorisnik}}</td></tr>
+				<tr><td>Ime: </td><td>{{detailViewKorisnik.ime}}</td></tr>
+				<tr><td>Prezime: </td><td>{{detailViewKorisnik.prezime}}</td></tr>
+				<tr><td>Email: </td><td>{{detailViewKorisnik.email}}</td></tr>
+				<tr><td>Datum rodjenja: </td><td>{{detailViewKorisnik.datumRodjenja | date : 'MM/dd/yyyy'}}</quick-datepicker></td></tr>
+				<tr><td>Korisnicko ime: </td><td>{{detailViewKorisnik.korisnickoIme}}</td></tr>
+				<tr><td>Lozinka: </td><td>{{detailViewKorisnik.lozinka}}</td></tr>
+				<tr><td>Tip korisnika: </td><td>{{detailViewKorisnik.tipKorisnika}}</td></tr>
+				<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+				<td></td></tr>
+			</table>
+		</form>
+</div>

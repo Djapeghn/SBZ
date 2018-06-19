@@ -239,6 +239,23 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 		});	
 	};
 	
+	$scope.refresh = function(){
+		korisnikFactory.getKorisnici()
+	          .success(function(data2){
+	        	  $scope.korisnici = data2;
+	          });
+	}
+	
+	$scope.deleteKorisnik = function(korisnik) {
+		korisnikFactory.deleteKorisnik(korisnik).then(function(data) {
+			$scope.refresh();
+			toast('Korisnik ' + korisnik.korisnickoIme + " obrisan.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska pri brisanju korisnika.");
+		});	
+	};
+	
 	/*$scope.usernameChanged = function() {
 	    $http.post('/WP/rest/fileData/checkUsername', $scope.volonter.username).then(function (response) {
 	        console.log(response.isValid);

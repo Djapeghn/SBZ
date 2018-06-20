@@ -1,0 +1,22 @@
+<div ng-controller="pacijentController">
+	<span>
+		<form name="addPacijentForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center"><input type="text" id="id" ng-model="pacijent.idPacijent" required></td></tr>
+					<tr><td align="center">Ime: </td><td align="center"><input type="text" id="ime" ng-model="pacijent.ime" required></td></tr>
+					<tr><td align="center">Prezime: </td><td align="center"><input type="text" id="prezime" ng-model="pacijent.prezime" required></td></tr>
+					<tr><td>Datum rodjenja: </td><td><quick-datepicker ng-model='datumRodjenjaDatePicker' date-format='MM/dd/yyyy' placeholder='Odaberi datum' disable-timepicker='true' required></quick-datepicker></td></tr>
+					<tr><td align="center">Pol: </td><td align="center">
+						<select id="pol" ng-model="pacijent.pol" required>
+							<option value="muski">Muski</option>
+							<option value="zenski">Zenski</option>
+						</select>
+					</td></tr>
+					<tr><td align="center"></td>
+						<td align="center"><button ng-disabled="addPacijentForm.$invalid" type="button" class='btn btn-default' ng-click="submit()">Dodaj</button></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

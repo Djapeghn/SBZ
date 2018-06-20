@@ -1,0 +1,20 @@
+<div  ng-controller="pacijentController">
+		<form name="modifyPacijentAdminForm" action="/">
+			<table border="1" cellpadding="5">
+					<tr><td align="center">Id: </td><td align="center">{{detailViewPacijent.idPacijent}}</td></tr>
+					<tr><td align="center">Ime: </td><td align="center"><input type="text" id="ime" ng-model="detailViewPacijent.ime" required></td></tr>
+					<tr><td align="center">Prezime: </td><td align="center"><input type="text" id="prezime" ng-model="detailViewPacijent.prezime" required></td></tr>
+					<tr><td align="center">Datum rodjenja: </td><td align="center">{{detailViewPacijent.datumRodjenja | date : 'MM/dd/yyyy'}}<quick-datepicker ng-model="datumRodjenjaDatePicker" date-format='MM/dd/yyyy' disable-timepicker='true' required></quick-datepicker></td></tr>
+					<tr><td align="center">Pol: </td><td align="center">
+						<select id="pol" ng-model="detailViewPacijent.pol">
+							<option value="muski">Muski</option>
+							<option value="zenski">Zenski</option>
+						</select>
+					</td></tr>
+					<tr><td align="center">Bolesti: </td><td align="center"><div ng-repeat="bolest in detailViewPacijent.bolesti">{{bolest.naziv}}</div></td></tr>
+					<tr><td>Alergican na lekove:</td><td align="center"><div ng-repeat="lek in detailViewPacijent.alergicanNaLekove">{{lek.naziv}}</div></td></tr>
+				<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+					<td align="center"><button ng-disabled="modifyPacijentAdminForm.$invalid" type="button" class='btn btn-default' ng-click="modify()">Azuriraj</button></td></tr>
+			</table>
+		</form>
+</div>

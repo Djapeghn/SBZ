@@ -1,0 +1,19 @@
+<div ng-controller="pacijentController">
+	<span>
+		<form name="modifyPacijentForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Id: </td><td align="center">{{detailViewPacijent.idPacijent}}</td></tr>
+					<tr><td align="center">Ime: </td><td align="center">{{detailViewPacijent.ime}}</td></tr>
+					<tr><td align="center">Prezime: </td><td align="center">{{detailViewPacijent.prezime}}</td></tr>
+					<tr><td align="center">Datum rodjenja: </td><td align="center">{{detailViewPacijent.datumRodjenja | date : 'MM/dd/yyyy'}}</td></tr>
+					<tr><td align="center">Pol: </td><td align="center">{{detailViewPacijent.pol}}</td></tr>
+					<tr><td align="center">Bolesti: </td><td align="center"><div ng-repeat="bolest in detailViewPacijent.bolesti">{{bolest.naziv}}</div></td></tr>
+					<tr><td>Alergican na lekove:</td><td align="center"><div ng-repeat="lek in detailViewPacijent.alergicanNaLekove">{{lek.naziv}}</div></td></tr>
+					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
+						<td align="center"></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

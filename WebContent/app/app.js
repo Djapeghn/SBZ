@@ -236,6 +236,16 @@ app.config(function($routeProvider) {
 		},
 		
 		templateUrl: 'partials/displayKorisniciAdmin.html'
+	}).when('/addPacijent',
+	{
+		resolve: {
+			"check": function($location, $rootScope) {
+				if($rootScope.loggedIn=="loggedOut") {
+					$location.path('/');
+				}
+			}
+		},
+		templateUrl: 'partials/addPacijent.html'
 	}).when('/korisnikDetailsAdmin',
 	{
 		resolve: {

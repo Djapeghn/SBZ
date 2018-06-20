@@ -296,7 +296,7 @@ app.controller('korisnikController', function($scope, korisnikFactory, $http, $r
 	$scope.modifyAccount = function() {
 		$scope.datumRodjenjaDatePicker;
 		$rootScope.loggedInKorisnik.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
-			$scope.modifyKorisnik($rootScope.loggedInKorisnik);
+		$scope.modifyKorisnik($rootScope.loggedInKorisnik);
 	}
 	
 	$scope.detailViewKorisnikAdmin = function(korisnik1) {
@@ -457,4 +457,102 @@ app.controller('bolestController', function($scope, bolestFactory, $http, $rootS
 		$location.path('/displayBolestiAdmin');
 		$scope.refresh();
 	};
+});
+
+app.controller('pacijentController', function($scope, pacijentFactory, $http, $rootScope, $window, $location, userPersistenceService) {
+	
+    function init() {
+    	console.log('pacijentController.Init');
+        pacijentFactory.getPacijenti().success(function (data) {
+        	$scope.pacijenti = data;
+		});
+    }
+	init();
+	
+	$scope.addPacijent = function(pacijent) {
+		pacijentFactory.addPacijent(pacijent).then(function(data) {
+			$scope.refresh();
+			toast('Pacijent ' + pacijent.idPacijent + " dodat.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Id je vec zauzet.");
+		});	
+	};
+	
+	$scope.modifyPacijent = function(pacijent) {
+		pacijentFactory.modifyPacijent(pacijent).then(function(data) {
+			$scope.refresh();
+			toast("Pacijent azuriran.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska prilikom azuriranja.");
+		});	
+	};
+	
+	$scope.refresh = function(){
+		pacijentFactory.getPacijenti()
+	          .success(function(data2){
+	        	  $scope.pacijenti = data2;
+	          });
+	}
+	
+	$scope.deletePacijent = function(pacijent) {
+		pacijentFactory.deletePacijent(pacijent).then(function(data) {
+			$scope.refresh();
+			toast('Pacijent ' + pacijent.idPacijent + " obrisan.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Greska pri brisanju pacijenta.");
+		});	
+	};
+	
+	$scope.back = function() {
+		//$location.path('/displayVanredneSituacije');
+		$window.history.back();
+	}
+	
+	$scope.submit = function() {
+		//$rootScope je vidljivo globalno
+		$scope.pacijent.idPacijent;
+		$scope.pacijent.ime;
+		$scope.pacijent.prezime;
+		$scope.datumRodjenjaDatePicker;
+		$scope.pacijent.pol;
+		$scope.pacijent.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
+		$scope.pacijent.pregledi = [];
+		$scope.pacijent.bolesti = [];
+		$scope.pacijent.alergicanNaLekove = [];
+		$scope.addPacijent($scope.pacijent);
+	}
+	
+	$scope.detailViewPacijentLekar = function(pacijent1) {
+		if(pacijent1==undefined) {
+			$rootScope.detailViewPacijent = userPersistenceService.getCookieData5();
+			$location.path('/pacijentDetails');
+		}
+		else {
+			$rootScope.detailViewPacijent = pacijent1;
+			userPersistenceService.setCookieData5($rootScope.detailViewPacijent);
+			$location.path('/pacijentDetails');
+		}
+	};
+	
+	$scope.detailViewPacijentAdmin = function(pacijent1) {
+		if(pacijent1==undefined) {
+			$rootScope.detailViewPacijent = userPersistenceService.getCookieData5();
+			$location.path('/pacijentDetailsAdmin');
+		}
+		else {
+			$rootScope.detailViewPacijent = pacijent1;
+			userPersistenceService.setCookieData5($rootScope.detailViewPacijent);
+			$location.path('/pacijentDetailsAdmin');
+		}
+	};
+	
+	$scope.modify = function() {
+		$scope.datumRodjenjaDatePicker;
+		$rootScope.detailViewPacijent.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
+		$scope.modifyPacijent($rootScope.detailViewPacijent);
+	}
+	
 });

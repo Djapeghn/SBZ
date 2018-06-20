@@ -1,0 +1,20 @@
+<div  ng-controller="pacijentController">
+			<table border="1">
+				<thead>
+					<tr>
+						<td align="center">Id</td>
+						<td align="center">ime</td>
+						<td align="center">prezime</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pacijent in pacijenti">
+						<td align="center">{{pacijent.idPacijent}}</td>
+						<td align="center">{{pacijent.ime}}</td>
+						<td align="center">{{pacijent.prezime}}</td>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="detailViewPacijentAdmin(pacijent)">Detaljnije</button></td>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="deletePacijent(pacijent)">Obrisi</button></td>
+					</tr>
+				</tbody>
+			</table>
+</div>

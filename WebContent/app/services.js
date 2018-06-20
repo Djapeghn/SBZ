@@ -163,12 +163,21 @@ app.factory("userPersistenceService", [
 				detailViewBolest = $cookieStore.get("detailViewBolest1");
 				return detailViewBolest;
 			},
+			setCookieData5: function(detailViewPacijent) {
+				detailViewPacijent1 = detailViewPacijent;
+				$cookieStore.put("detailViewPacijent1", detailViewPacijent);
+			},
+			getCookieData5: function() {
+				detailViewPacijent = $cookieStore.get("detailViewPacijent1");
+				return detailViewPacijent;
+			},
 			clearCookieData: function() {
 				userName = "";
 				$cookieStore.remove("userName");
 				$cookieStore.remove("detailViewLek1");
 				$cookieStore.remove("detailViewKorisnik1");
 				$cookieStore.remove("detailViewBolest1");
+				$cookieStore.remove("detailViewPacijent1");
 			}
 		}
 	}

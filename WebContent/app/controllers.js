@@ -123,19 +123,27 @@ app.controller('loginController', function($scope, $location, $rootScope, lekFac
 		//userPersistenceService.clearCookieData();
     	if(userPersistenceService.getCookieData()===undefined) {
     		$rootScope.loggedIn = "loggedOut";
-    		if(userPersistenceService.getCookieData2()!=undefined) {
+    		/*if(userPersistenceService.getCookieData2()!=undefined) {
         		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
-    		}
+    		}*/
     	}
     	else if(userPersistenceService.getCookieData().korisnickoIme==="admin") {
     		$rootScope.loggedIn = "loggedInAsAdmin";
     		$rootScope.loggedInKorisnik = userPersistenceService.getCookieData();
     		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
+    		$rootScope.detailViewKorisnik = userPersistenceService.getCookieData3();
+    		$rootScope.detailViewBolest = userPersistenceService.getCookieData4();
+    		$rootScope.detailViewPacijent = userPersistenceService.getCookieData5();
+    		$rootScope.detailViewPregled = userPersistenceService.getCookieData6();
     	}
     	else {
     		$rootScope.loggedIn = "loggedInAsLekar";
     		$rootScope.loggedInKorisnik = userPersistenceService.getCookieData();
     		$rootScope.detailViewLek = userPersistenceService.getCookieData2();
+    		$rootScope.detailViewKorisnik = userPersistenceService.getCookieData3();
+    		$rootScope.detailViewBolest = userPersistenceService.getCookieData4();
+    		$rootScope.detailViewPacijent = userPersistenceService.getCookieData5();
+    		$rootScope.detailViewPregled = userPersistenceService.getCookieData6();
     	}
     }
 	init();
@@ -144,15 +152,15 @@ app.controller('loginController', function($scope, $location, $rootScope, lekFac
 	$scope.findLoggedIn = function(username) {
 		for(var i=0; i < $scope.korisnici.length; i++) {
 			if($scope.korisnici[i].korisnickoIme===$scope.korisnik.korisnickoIme) {
-				$rootScope.loggedInKorisnik.idKorisnik = $scope.korisnici[i].idKorisnik;
+				/*$rootScope.loggedInKorisnik.idKorisnik = $scope.korisnici[i].idKorisnik;
 				$rootScope.loggedInKorisnik.ime = $scope.korisnici[i].ime;
 				$rootScope.loggedInKorisnik.prezime = $scope.korisnici[i].prezime;
 				$rootScope.loggedInKorisnik.email = $scope.korisnici[i].email;
 				$rootScope.loggedInKorisnik.datumRodjenja = $scope.korisnici[i].datumRodjenja;
 				$rootScope.loggedInKorisnik.korisnickoIme = $scope.korisnici[i].korisnickoIme;
 				$rootScope.loggedInKorisnik.lozinka = $scope.korisnici[i].lozinka;
-				$rootScope.loggedInKorisnik.tipKorisnika = $scope.korisnici[i].tipKorisnika;
-				//$rootScope.loggedInKorisnik.slikaPutanja = $scope.korisnici[i].slikaPutanja;
+				$rootScope.loggedInKorisnik.tipKorisnika = $scope.korisnici[i].tipKorisnika;*/
+				$rootScope.loggedInKorisnik = $scope.korisnici[i];
 				
 				if($rootScope.loggedInKorisnik.korisnickoIme==="admin") {
 					$rootScope.loggedIn = "loggedInAsAdmin";
@@ -459,12 +467,24 @@ app.controller('bolestController', function($scope, bolestFactory, $http, $rootS
 	};
 });
 
-app.controller('pacijentController', function($scope, pacijentFactory, $http, $rootScope, $window, $location, userPersistenceService) {
+app.controller('pacijentController', function($scope, pacijentFactory, pregledFactory, bolestFactory, lekFactory, $http, $rootScope, $window, $location, userPersistenceService) {
 	
     function init() {
     	console.log('pacijentController.Init');
         pacijentFactory.getPacijenti().success(function (data) {
         	$scope.pacijenti = data;
+		});
+        pregledFactory.getPregledi().success(function (data2) {
+        	$scope.pregledi = data2;
+		});
+        bolestFactory.getBolesti().success(function (data3) {
+        	$scope.bolesti = data3;
+		});
+        bolestFactory.getAllSimptomi().success(function (data4) {
+        	$scope.placeholderBolest = data4;
+		});
+        lekFactory.getLekovi().success(function (data5) {
+        	$scope.lekovi = data5;
 		});
     }
 	init();
@@ -491,9 +511,33 @@ app.controller('pacijentController', function($scope, pacijentFactory, $http, $r
 	
 	$scope.refresh = function(){
 		pacijentFactory.getPacijenti()
-	          .success(function(data2){
-	        	  $scope.pacijenti = data2;
+	          .success(function(data1){
+	        	  $scope.pacijenti = data1;
 	          });
+        pregledFactory.getPregledi().success(function (data2) {
+        	$scope.pregledi = data2;
+		});
+        bolestFactory.getBolesti().success(function (data3) {
+        	$scope.bolesti = data3;
+		});
+        bolestFactory.getAllSimptomi().success(function (data4) {
+        	$scope.placeholderBolest = data4;
+		});
+        lekFactory.getLekovi().success(function (data5) {
+        	$scope.lekovi = data5;
+		});
+	}
+	
+	$scope.simptomiPregledaFields = { fields: [] };
+
+	$scope.addSimptomiPregledaField = function() {
+		$scope.simptomiPregledaFields.fields.push('');
+	}
+	
+	$scope.alergicanNaLekoveFields = { fields: [] };
+
+	$scope.addAlergicanNaLekoveField = function() {
+		$scope.alergicanNaLekoveFields.fields.push('');
 	}
 	
 	$scope.deletePacijent = function(pacijent) {
@@ -553,6 +597,69 @@ app.controller('pacijentController', function($scope, pacijentFactory, $http, $r
 		$scope.datumRodjenjaDatePicker;
 		$rootScope.detailViewPacijent.datumRodjenja = Date.parse($scope.datumRodjenjaDatePicker);
 		$scope.modifyPacijent($rootScope.detailViewPacijent);
+	}
+	
+	$scope.addPregledPage = function() {
+		if($rootScope.detailViewPacijent==undefined) {
+			$location.path('/');
+		}
+		else {
+			$location.path('/addPregled');
+		}
+	}
+	
+	$scope.addPregled = function(pregled) {
+		pregledFactory.addPregled(pregled).then(function(data) {
+			$scope.refresh();
+			toast('Pregled ' + pregled.idPregleda + " dodat.");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Id je vec zauzet.");
+		});	
+	};
+	
+	$scope.addPregledSubmit = function() {
+		$scope.pregled.idPregleda;
+		$scope.pregled.lekar = $rootScope.loggedInKorisnik;
+		//$scope.pregled.datumPregleda = new Date();
+		$scope.pregled.datumPregleda = new Date();/*Date.parse("01/01/1990");*/
+		$scope.pregled.simptomi = [];
+		$scope.dijagnostikovanaBolest1;
+		$scope.propisanLek1;
+		$scope.pregled.dijagnostikovanaBolest = {};
+		$scope.pregled.propisanLek = {};
+		$scope.alergicanNaLekove1 = {};
+		
+		for(var i=0; i<$scope.simptomiPregledaFields.fields.length; i++) {
+			if($scope.simptomiPregledaFields.fields[i]!=="") {
+				$scope.pregled.simptomi.push($scope.simptomiPregledaFields.fields[i]);
+			}
+		}
+		
+		for(var i=0; i<$scope.alergicanNaLekoveFields.fields.length; i++) {
+			if($scope.alergicanNaLekoveFields.fields[i]!=="") {
+				$scope.alergicanNaLekove1 = angular.fromJson($scope.alergicanNaLekoveFields.fields[i]);
+				$rootScope.detailViewPacijent.alergicanNaLekove.push($scope.alergicanNaLekove1);
+			}
+		}
+		
+		if ($scope.dijagnostikovanaBolest1!==undefined) {
+			//pretvara json string u objekat
+			$scope.pregled.dijagnostikovanaBolest = angular.fromJson($scope.dijagnostikovanaBolest1);
+			$rootScope.detailViewPacijent.bolesti.push($scope.pregled.dijagnostikovanaBolest);
+		}
+		if ($scope.propisanLek1!==undefined) {
+			//pretvara json string u objekat
+			$scope.pregled.propisanLek = angular.fromJson($scope.propisanLek1);
+			$rootScope.detailViewPacijent.pregledi.push($scope.pregled);
+			$scope.modifyPacijent($rootScope.detailViewPacijent);
+			userPersistenceService.setCookieData5($rootScope.detailViewPacijent);
+		}
+		
+		console.log($scope.pregled);
+		
+		$scope.addPregled($scope.pregled);
+		$scope.back();
 	}
 	
 });

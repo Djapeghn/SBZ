@@ -171,6 +171,14 @@ app.factory("userPersistenceService", [
 				detailViewPacijent = $cookieStore.get("detailViewPacijent1");
 				return detailViewPacijent;
 			},
+			setCookieData6: function(detailViewPregled) {
+				detailViewPregled1 = detailViewPregled;
+				$cookieStore.put("detailViewPregled1", detailViewPregled);
+			},
+			getCookieData6: function() {
+				detailViewPregled = $cookieStore.get("detailViewPregled1");
+				return detailViewPregled;
+			},
 			clearCookieData: function() {
 				userName = "";
 				$cookieStore.remove("userName");
@@ -178,6 +186,7 @@ app.factory("userPersistenceService", [
 				$cookieStore.remove("detailViewKorisnik1");
 				$cookieStore.remove("detailViewBolest1");
 				$cookieStore.remove("detailViewPacijent1");
+				$cookieStore.remove("detailViewPregled1");
 			}
 		}
 	}

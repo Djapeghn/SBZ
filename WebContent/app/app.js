@@ -246,6 +246,19 @@ app.config(function($routeProvider) {
 			}
 		},
 		templateUrl: 'partials/addPacijent.html'
+	}).when('/addPregled',
+	{
+		resolve: {
+			"check": function($location, $rootScope) {
+				if($rootScope.loggedIn=="loggedOut") {
+					$location.path('/');
+				}
+				else if($rootScope.detailViewPacijent==undefined) {
+					$location.path('/');
+				}
+			}
+		},
+		templateUrl: 'partials/addPregled.html'
 	}).when('/korisnikDetailsAdmin',
 	{
 		resolve: {

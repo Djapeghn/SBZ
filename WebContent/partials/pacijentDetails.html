@@ -11,7 +11,7 @@
 					<tr><td align="center">Bolesti: </td><td align="center"><div ng-repeat="bolest in detailViewPacijent.bolesti">{{bolest.naziv}}</div></td></tr>
 					<tr><td>Alergican na lekove:</td><td align="center"><div ng-repeat="lek in detailViewPacijent.alergicanNaLekove">{{lek.naziv}}</div></td></tr>
 					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td>
-						<td align="center"></td></tr>
+						<td align="center"><button type="button" class='btn btn-default' ng-click="addPregledPage()">Novi Pregled</button></td></tr>
 				</div>
 			</table>
 		</form>

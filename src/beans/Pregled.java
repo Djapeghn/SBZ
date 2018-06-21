@@ -83,9 +83,17 @@ public class Pregled {
 			sb.deleteCharAt(sb.length()-1);
 		}
 		sb.append("|");
-		sb.append(dijagnostikovanaBolest.getIdBolest());
+		if(dijagnostikovanaBolest!=null) {
+			if(dijagnostikovanaBolest.getIdBolest()!=null) {
+				sb.append(dijagnostikovanaBolest.getIdBolest());
+			}
+		}
 		sb.append("|");
-		sb.append(propisanLek.getIdLek());
+		if(propisanLek!=null) {
+			if(propisanLek.getIdLek()!=null) {
+				sb.append(propisanLek.getIdLek());
+			}
+		}
 		
 		return sb.toString();
 		

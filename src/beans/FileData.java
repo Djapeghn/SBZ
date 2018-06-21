@@ -282,11 +282,14 @@ public class FileData {
 				}
 				datumPregleda = convertStringToDate(splittedLine[2]);
 				
-				String[] splittedSimptomi = splittedLine[3].split(";");
+				if(!splittedLine[3].equals("")) {
 				
-				for(String simptomString : splittedSimptomi) {
+					String[] splittedSimptomi = splittedLine[3].split(";");
+				
+					for(String simptomString : splittedSimptomi) {
 						
-					simptomi.add(Simptom.valueOf(simptomString));
+						simptomi.add(Simptom.valueOf(simptomString));
+					}
 				}
 				
 				if(bolesti.containsKey(splittedLine[4])) {

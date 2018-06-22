@@ -1,0 +1,21 @@
+<div ng-controller="pacijentController">
+	<span>
+		<form name="modifyPregledForm" action="/">
+			<table border="1" cellpadding="5" style="float: left">
+				<div>
+					<tr><td align="center">Pacijent: </td><td align="center">{{detailViewPacijent.ime}} {{detailViewPacijent.prezime}} ({{detailViewPacijent.idPacijent}})</td></tr>
+					<tr><td align="center">Id: </td><td align="center">{{detailViewPregled.idPregleda}}</td></tr>
+					<tr><td align="center">Lekar: </td><td align="center">{{detailViewPregled.lekar.ime}} {{detailViewPregled.lekar.prezime}} ({{detailViewPregled.lekar.korisnickoIme}})</td></tr>
+					<tr><td align="center">Datum pregleda: </td><td align="center">{{detailViewPregled.datumPregleda | date : 'MM/dd/yyyy'}}</td></tr>
+					<tr>
+						<td align="center">Simptomi:</td>
+						<td align="center"><div ng-repeat="simptom in detailViewPregled.simptomi">{{simptom}}</div></td>
+					</tr>
+					<tr><td align="center">Dijagnostikovana bolest: </td><td align="center">{{detailViewPregled.dijagnostikovanaBolest.naziv}}</td></tr>
+					<tr><td align="center">Propisan lek: </td><td align="center">{{detailViewPregled.propisanLek.naziv}}</td></tr>
+					<tr><td align="center"><button type="button" class='btn btn-default' ng-click="back()">Nazad</button></td><td></td></tr>
+				</div>
+			</table>
+		</form>
+	</span>
+</div>

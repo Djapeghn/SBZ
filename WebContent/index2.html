@@ -23,20 +23,6 @@
 					<a ng-href="#/login">Logovanje</a>
 					<a ng-href="#/register">Registracija</a>
 				</div>
-				<!--<header>
-					<div ng-style="navbarHeaderStyle" class="navbar-header">
-						<table border="2">	
-							<div>
-								<tr>
-									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
-									<td><a class="navbar-header-item" ng-href="#/display">Prikazi vanredne situacije</a></td>
-									<td><a class="navbar-header-item" ng-href="#/login">Logovanje</a></td>
-									<td><a class="navbar-header-item" ng-href="#/register">Registracija</a></td>
-								</tr>
-							</div>
-						</table>
-					</div>
-				</header>-->
   			</div>
   			<div ng-switch-when="loggedInAsLekar">
   				<div class="topnav">
@@ -46,25 +32,9 @@
 					<a ng-href="#/displayPacijenti">Pacijenti</a>
 					<a ng-href="#/displayMojiPregledi">Moji Pregledi</a>
 					<a ng-href="#/addPacijent">Novi Pacijent</a>
-					<a ng-href="#/addPregled">Novi Pregled</a>
 					<a ng-href="#/azurirajNalog">Ulogovan: {{loggedInKorisnik.korisnickoIme}}</a>
 					<a ng-href="#/login" ng-click="logout()">Izloguj se</a>
 				</div>
-				<!--<header>
-					<div ng-style="navbarHeaderStyle" class="navbar-header">
-						<table border="2">	
-							<div>
-								<tr>
-									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
-									<td><a class="navbar-header-item" ng-href="#/display">Prikazi vanredne situacije</a></td>
-									<td><a class="navbar-header-item" ng-href="#/displayVanredneSituacijeForVolonter">Moje vanredne situacije</a></td>
-									<td><a class="navbar-header-item" ng-href="#/nalog">Nalog</a></td>
-									<td><a class="navbar-header-item" ng-href="#/login" ng-click="logout()">Izloguj se</a></td>
-								</tr>
-							</div>
-						</table>
-					</div>
-				</header>-->
   			</div>
   			<div ng-switch-when="loggedInAsAdmin">
   				<div class="topnav">
@@ -76,27 +46,9 @@
 					<a ng-href="#/addLek">Novi Lek</a>
 					<a ng-href="#/addBolest">Nova Bolest</a>
 					<a ng-href="#/addPacijent">Novi Pacijent</a>
-					<a ng-href="#/addPregled">Novi Pregled</a>
 					<a ng-href="#/azurirajNalog">Ulogovan: {{loggedInKorisnik.korisnickoIme}}</a>
 					<a ng-href="#/login" ng-click="logout()">Izloguj se</a>
 				</div>
-				<!--<header>
-					<div ng-style="navbarHeaderStyle" class="navbar-header">
-						<table border="2">	
-							<div>
-								<tr>
-									<td><a class="navbar-header-item" ng-href="#/">Prijavi vanrednu situaciju</a></td>
-									<td><a class="navbar-header-item" ng-href="#/displayAdmin">Prikazi vanredne situacije</a></td>
-									<td><a class="navbar-header-item" ng-href="#/displayVolonteriAdmin">Svi volonteri</a></td>
-									<td><a class="navbar-header-item" ng-href="#/displayTeritorijeAdmin">Sve teritorije</a></td>
-									<td><a class="navbar-header-item" ng-href="#/addTeritorija">Dodaj teritoriju</a></td>
-									<td><a class="navbar-header-item" ng-href="#/nalog">Nalog</a></td>
-									<td><a class="navbar-header-item" ng-href="#/login" ng-click="logout()">Izloguj se</a></td>
-								</tr>
-							</div>
-						</table>
-					</div>
-				</header>-->
   			</div>
 		</div>
 		
@@ -105,9 +57,6 @@
 		<footer>
 			<div><h4><small style="font-family: Verdana; color: #AACCFF;">&copy</small> 2018 Predrag Kaljevic</h4></div>
 		</footer>
-   		<!--<div style="position: absolute; bottom: 10px; background-color: green">
-   			TEST (C) 2010
-   		</div>-->
 
 		
 		<script src="js/angular.js"></script>

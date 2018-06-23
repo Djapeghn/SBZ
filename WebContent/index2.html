@@ -13,7 +13,7 @@
 	<body ng-controller="loginController" style="background-color: #222233; color: #AACCFF; font-family: Calibri, Myriad;">
 	
 		<header>
-    		<h1>cdss.com</h1>
+    		<h1>CLINICAL DECISION SUPPORT SYSTEM</h1>
     	</header>
     	
     	<div ng-switch="loggedIn">
@@ -30,7 +30,6 @@
 					<a ng-href="#/displayLekovi">Lekovi</a>
 					<a ng-href="#/displayBolesti">Bolesti</a>
 					<a ng-href="#/displayPacijenti">Pacijenti</a>
-					<a ng-href="#/displayMojiPregledi">Moji Pregledi</a>
 					<a ng-href="#/addPacijent">Novi Pacijent</a>
 					<a ng-href="#/azurirajNalog">Ulogovan: {{loggedInKorisnik.korisnickoIme}}</a>
 					<a ng-href="#/login" ng-click="logout()">Izloguj se</a>

@@ -1,0 +1,225 @@
+package rules
+
+import beans.*;
+import services.*;
+import java.util.Date;
+import java.util.HashMap;
+ 
+ 
+rule "Prehlada provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.CURENJE_IZ_NOSA)) {
+    			$b.put("prehlada", (Double) $b.get("prehlada") + 1.0);
+    		}
+    		else if(s.equals(Simptom.BOL_U_GRLU)) {
+    			$b.put("prehlada", (Double) $b.get("prehlada") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GLAVOBOLJA)) {
+    			$b.put("prehlada", (Double) $b.get("prehlada") + 1.0);
+    		}
+    		else if(s.equals(Simptom.KIJANJE)) {
+    			$b.put("prehlada", (Double) $b.get("prehlada") + 1.0);
+    		}
+    		else if(s.equals(Simptom.KASALJ)) {
+    			$b.put("prehlada", (Double) $b.get("prehlada") + 1.0);
+    		}
+    	}
+    	$b.put("prehlada", (Double) $b.get("prehlada")/6);
+end
+
+rule "Groznica provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.KIJANJE)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.BOL_U_GRLU)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.KASALJ)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.TEMPERATURA_VECA_OD_38)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.CURENJE_IZ_NOSA)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GLAVOBOLJA)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    		else if(s.equals(Simptom.DRHTAVICA)) {
+    			$b.put("groznica", (Double) $b.get("groznica") + 1.0);
+    		}
+    	}
+    	$b.put("groznica", (Double) $b.get("groznica")/7);
+end
+
+rule "Upala krajnika provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.BOL_U_GRLU)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.BOL_KOJI_SE_SIRI_DO_USIJU)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GLAVOBOLJA)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.TEMPERATURA_OD_40_DO_41)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.DRHTAVICA)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GUBITAK_APETITA)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.UMOR)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    		else if(s.equals(Simptom.ZUTI_SEKRET_IZ_NOSA)) {
+    			$b.put("upala krajnika", (Double) $b.get("upala krajnika") + 1.0);
+    		}
+    	}
+    	$b.put("upala krajnika", (Double) $b.get("upala krajnika")/8);
+end
+
+rule "Sinusna infekcija provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.OTICANJE_OKO_OCIJU)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GLAVOBOLJA)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.ZUTI_SEKRET_IZ_NOSA)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.BOL_U_GRLU)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.TEMPERATURA_VECA_OD_38)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.KASALJ)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    		else if(s.equals(Simptom.PACIJENT_BOLOVAO_OD_PREHLADE_ILI_GROZNICE_U_POSLEDNJIH_60_DANA)) {
+    			$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija") + 1.0);
+    		}
+    	}
+    	$b.put("sinusna infekcija", (Double) $b.get("sinusna infekcija")/7);
+end
+
+rule "Hipertenzija provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.U_POSLEDNJIH_6_MESECI_ZABELEZENO_BAR_10_SLUCAJEVA_U_KOJEM_JE_PACIJENT_IMAO_VISOK_PRITISAK)) {
+    			$b.put("hipertenzija", (Double) $b.get("hipertenzija") + 1.0);
+    		}
+    	}
+    	$b.put("hipertenzija", (Double) $b.get("hipertenzija")/1);
+end
+
+rule "Dijabetes provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.CESTO_URINIRANJE)) {
+    			$b.put("dijabetes", (Double) $b.get("dijabetes") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GUBITAK_TELESNE_TEZINE)) {
+    			$b.put("dijabetes", (Double) $b.get("dijabetes") + 1.0);
+    		}
+    		else if(s.equals(Simptom.ZAMOR)) {
+    			$b.put("dijabetes", (Double) $b.get("dijabetes") + 1.0);
+    		}
+    		else if(s.equals(Simptom.MUCNINA_I_POVRACANJE)) {
+    			$b.put("dijabetes", (Double) $b.get("dijabetes") + 1.0);
+    		}
+    	}
+    	$b.put("dijabetes", (Double) $b.get("dijabetes")/4);
+end
+
+rule "Hronicna bubrezna bolest provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.ZAMOR)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.NOCTURIA)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.OTOCI_NOGU_I_ZGLOBOVA)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GUSENJE)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.BOL_U_GRUDIMA)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.PACIJENT_BOLUJE_OD_HIPERTENZIJE_VISE_OD_6_MESECI)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    		else if(s.equals(Simptom.PACIJENT_BOLUJE_OD_DIJABETESA)) {
+    			$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest") + 1.0);
+    		}
+    	}
+    	$b.put("hronicna bubrezna bolest", (Double) $b.get("hronicna bubrezna bolest")/7);
+end
+
+rule "Akutna bubrezna povreda provera"
+    when
+        $p: Pregled() and
+        $b: HashMap(String, Double)
+    then
+    	for(Simptom s : $p.getSimptomi()) {
+    		if(s.equals(Simptom.OPORAVLJA_SE_OD_OPERACIJE)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.ZAMOR)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.GUSENJE)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.OTOCI_NOGU_I_ZGLOBOVA)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.DIJAREJA)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.U_POSLEDNJIH_14_DANA_DIJAGNOSTIKOVANA_BOLEST_KOJA_KAO_SIMPTOM_IMA_POVISENU_TELESNU_TEMPERATURU)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    		else if(s.equals(Simptom.U_POSLEDNJIH_21_DANA_DIJAGNOSTIKOVANA_BOLEST_ZA_KOJU_JE_PRIMAO_ANTIBIOTIKE)) {
+    			$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda") + 1.0);
+    		}
+    	}
+    	$b.put("akutna bubrezna povreda", (Double) $b.get("akutna bubrezna povreda")/7);
+end

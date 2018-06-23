@@ -499,6 +499,16 @@ app.controller('pacijentController', function($scope, pacijentFactory, pregledFa
 		});	
 	};
 	
+	$scope.dijagnostika = function(pregled) {
+		pregledFactory.dijagnostika(pregled).then(function(data) {
+			$scope.refresh();
+			toast('Dijagnostikovana bolest je: ' + data + ".");
+		}).catch(function (response) {
+			//$notify.error(response.msg);
+			toast("Bolest neuspesno dijagnostikovana.");
+		});	
+	};
+	
 	$scope.modifyPacijent = function(pacijent) {
 		pacijentFactory.modifyPacijent(pacijent).then(function(data) {
 			$scope.refresh();
@@ -716,6 +726,50 @@ app.controller('pacijentController', function($scope, pacijentFactory, pregledFa
 		
 		$scope.addPregled($scope.pregled);
 		$scope.back();
+	}
+	
+	$scope.dijagnostikaSubmit = function() {
+		$scope.pregled = {};
+		$scope.pregled.idPregleda = "";
+		$scope.pregled.lekar = $rootScope.loggedInKorisnik;
+		$scope.pregled.datumPregleda = new Date();
+		$scope.pregled.simptomi = [];
+		//$scope.dijagnostikovanaBolest1;
+		//$scope.propisanLek1;
+		$scope.pregled.dijagnostikovanaBolest = {};
+		$scope.pregled.propisanLek = {};
+		//$scope.alergicanNaLekove1 = {};
+		
+		for(var i=0; i<$scope.simptomiPregledaFields.fields.length; i++) {
+			if($scope.simptomiPregledaFields.fields[i]!=="") {
+				$scope.pregled.simptomi.push($scope.simptomiPregledaFields.fields[i]);
+			}
+		}
+		
+		/*for(var i=0; i<$scope.alergicanNaLekoveFields.fields.length; i++) {
+			if($scope.alergicanNaLekoveFields.fields[i]!=="") {
+				$scope.alergicanNaLekove1 = angular.fromJson($scope.alergicanNaLekoveFields.fields[i]);
+				$rootScope.detailViewPacijent.alergicanNaLekove.push($scope.alergicanNaLekove1);
+			}
+		}
+		
+		if ($scope.dijagnostikovanaBolest1!==undefined) {
+			//pretvara json string u objekat
+			$scope.pregled.dijagnostikovanaBolest = angular.fromJson($scope.dijagnostikovanaBolest1);
+			$rootScope.detailViewPacijent.bolesti.push($scope.pregled.dijagnostikovanaBolest);
+		}
+		if ($scope.propisanLek1!==undefined) {
+			//pretvara json string u objekat
+			$scope.pregled.propisanLek = angular.fromJson($scope.propisanLek1);
+			$rootScope.detailViewPacijent.pregledi.push($scope.pregled);
+			$scope.modifyPacijent($rootScope.detailViewPacijent);
+			userPersistenceService.setCookieData5($rootScope.detailViewPacijent);
+		}*/
+		
+		console.log($scope.pregled);
+		
+		$scope.dijagnostika($scope.pregled);
+		//$scope.back();
 	}
 	
 	$scope.modifyPregledSubmit = function() {

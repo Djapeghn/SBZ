@@ -1,7 +1,9 @@
 package services;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 import beans.Bolest;
 import beans.FileData;
@@ -29,6 +35,59 @@ public class FileDataService {
 	HttpServletRequest request;
 	@Context
 	ServletContext ctx;
+	
+	@POST
+	@Path("/dijagnostika")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String dijagnostika(Pregled p) {
+		
+        KieServices ks = KieServices.Factory.get();
+	    KieContainer kContainer = ks.getKieClasspathContainer();
+    	KieSession kSession = kContainer.newKieSession("ksession-rules");
+    	
+    	Double verovatnocaBolesti = 0.0;
+    	String najverovatnijaBolest = "";
+    	
+    	HashMap<String, Double> bolestiRules = new HashMap<String,Double>();
+    	bolestiRules.put("prehlada", 0.0);
+    	bolestiRules.put("groznica", 0.0);
+    	bolestiRules.put("upala krajnika", 0.0);
+    	bolestiRules.put("sinusna infekcija", 0.0);
+    	bolestiRules.put("hipertenzija", 0.0);
+    	bolestiRules.put("dijabetes", 0.0);
+    	bolestiRules.put("hronicna bubrezna bolest", 0.0);
+    	bolestiRules.put("akutna bubrezna povreda", 0.0);
+    	
+    	
+    	//ArrayList<Bolest> b = new ArrayList<Bolest>(getFileData().getBolestValues());
+    	
+        kSession.insert(p);
+        kSession.insert(bolestiRules);
+        kSession.insert(verovatnocaBolesti);
+        //kSession.insert(accountingPeriod);
+        kSession.fireAllRules();
+        
+        for(String key : bolestiRules.keySet()) {
+        	System.out.println(key + " " + bolestiRules.get(key));
+        	if(bolestiRules.get(key)>verovatnocaBolesti) {
+        		najverovatnijaBolest = key;
+        		verovatnocaBolesti = bolestiRules.get(key);
+        	}
+        }
+        
+        return najverovatnijaBolest;
+		
+		/*if(getFileData().nazivExistsLekovi(lek.getNaziv())) {
+			return Response.status(Status.CONFLICT).entity("{\"msg\":\"Duplicate naziv\"}").build();
+		}
+		else if(getFileData().idExistsLekovi(lek.getIdLek())) {
+			return Response.status(Status.CONFLICT).entity("{\"msg\":\"Duplicate id\"}").build();
+		}
+		getFileData().getLekovi().put(lek.getIdLek(), lek);
+		getFileData().writeData();
+		return Response.ok().build();*/
+	}
 	
 	@GET
 	@Path("/getLekovi")

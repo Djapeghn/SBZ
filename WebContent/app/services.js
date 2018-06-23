@@ -85,6 +85,10 @@ app.factory('pregledFactory', function($http) {
 	factory.getPregledi = function() {
 		return $http.get('/CDSS/rest/fileData/getPregledi');
 	};
+	
+	factory.dijagnostika = function(pregled) {
+		return $http.post('/CDSS/rest/fileData/dijagnostika', pregled);
+	};
 
 	factory.addPregled = function(pregled) {
 		return $http.post('/CDSS/rest/fileData/addPregled', pregled);

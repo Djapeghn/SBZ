@@ -1,0 +1,318 @@
+<Project>
+  <Name>CDSS</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Class Diagram</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Lek</Name>
+        <Access>Public</Access>
+        <Location left="305" top="309" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String idLek</Member>
+        <Member type="Field">String naziv</Member>
+        <Member type="Field">ArrayList&lt;Sastojak&gt; sastojci</Member>
+        <Member type="Field">GrupaLekova grupaLekova</Member>
+        <Member type="Constructor">public Lek()</Member>
+        <Member type="Constructor">public Lek(String idLek, String naziv, ArrayList&lt;Sastojak&gt; sastojci, GrupaLekova grupaLekova)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>GrupaBolesti</Name>
+        <Access>Public</Access>
+        <Location left="1085" top="107" />
+        <Size width="162" height="112" />
+        <Collapsed>True</Collapsed>
+        <Value>PRVA</Value>
+        <Value>DRUGA</Value>
+        <Value>TRECA</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>GrupaLekova</Name>
+        <Access>Public</Access>
+        <Location left="487" top="107" />
+        <Size width="162" height="112" />
+        <Collapsed>True</Collapsed>
+        <Value>ANTIBIOTICI</Value>
+        <Value>ANALGETICI</Value>
+        <Value>OSTALO</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Sastojak</Name>
+        <Access>Public</Access>
+        <Location left="145" top="107" />
+        <Size width="162" height="299" />
+        <Collapsed>True</Collapsed>
+        <Value>SASTOJAK0</Value>
+        <Value>SASTOJAK1</Value>
+        <Value>SASTOJAK2</Value>
+        <Value>SASTOJAK3</Value>
+        <Value>SASTOJAK4</Value>
+        <Value>SASTOJAK5</Value>
+        <Value>SASTOJAK6</Value>
+        <Value>SASTOJAK7</Value>
+        <Value>SASTOJAK8</Value>
+        <Value>SASTOJAK9</Value>
+        <Value>SASTOJAK10</Value>
+        <Value>SASTOJAK11</Value>
+        <Value>SASTOJAK12</Value>
+        <Value>SASTOJAK13</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Simptom</Name>
+        <Access>Public</Access>
+        <Location left="795" top="107" />
+        <Size width="162" height="554" />
+        <Collapsed>True</Collapsed>
+        <Value>CURENJE_IZ_NOSA</Value>
+        <Value>BOL_U_GRLU</Value>
+        <Value>GLAVOBOLJA</Value>
+        <Value>KIJANJE</Value>
+        <Value>KASALJ</Value>
+        <Value>TEMPERATURA_VECA_OD_38</Value>
+        <Value>DRHTAVICA</Value>
+        <Value>BOL_KOJI_SE_SIRI_DO_USIJU</Value>
+        <Value>TEMPERATURA_OD_40_DO_41</Value>
+        <Value>GUBITAK_APETITA</Value>
+        <Value>UMOR</Value>
+        <Value>ZUTI_SEKRET_IZ_NOSA</Value>
+        <Value>OTICANJE_OKO_OCIJU</Value>
+        <Value>PACIJENT_BOLOVAO_OD_PREHLADE_ILI_GROZNICE_U_POSLEDNJIH_60_DANA</Value>
+        <Value>U_POSLEDNJIH_6_MESECI_ZABELEZENO_BAR_10_SLUCAJEVA_U_KOJEM_JE_PACIJENT_IMAO_VISOK_PRITISAK</Value>
+        <Value>CESTO_URINIRANJE</Value>
+        <Value>GUBITAK_TELESNE_TEZINE</Value>
+        <Value>ZAMOR</Value>
+        <Value>MUCNINA_I_POVRACANJE</Value>
+        <Value>NOCTURIA</Value>
+        <Value>OTOCI_NOGU_I_ZGLOBOVA</Value>
+        <Value>GUSENJE</Value>
+        <Value>BOL_U_GRUDIMA</Value>
+        <Value>PACIJENT_BOLUJE_OD_HIPERTENZIJE_VISE_OD_6_MESECI</Value>
+        <Value>PACIJENT_BOLUJE_OD_DIJABETESA</Value>
+        <Value>OPORAVLJA_SE_OD_OPERACIJE</Value>
+        <Value>DIJAREJA</Value>
+        <Value>U_POSLEDNJIH_14_DANA_DIJAGNOSTIKOVANA_BOLEST_KOJA_KAO_SIMPTOM_IMA_POVISENU_TELESNU_TEMPERATURU</Value>
+        <Value>U_POSLEDNJIH_21_DANA_DIJAGNOSTIKOVANA_BOLEST_ZA_KOJU_JE_PRIMAO_ANTIBIOTIKE</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>TipKorisnika</Name>
+        <Access>Public</Access>
+        <Location left="1593" top="96" />
+        <Size width="162" height="95" />
+        <Collapsed>True</Collapsed>
+        <Value>Administrator</Value>
+        <Value>Lekar</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>Bolest</Name>
+        <Access>Public</Access>
+        <Location left="934" top="309" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String idBolest</Member>
+        <Member type="Field">String naziv</Member>
+        <Member type="Field">GrupaBolesti grupa</Member>
+        <Member type="Field">ArrayList&lt;Simptom&gt; opstiSimptomi</Member>
+        <Member type="Field">ArrayList&lt;Simptom&gt; specificniSimptomi</Member>
+        <Member type="Constructor">public Bolest()</Member>
+        <Member type="Constructor">public Bolest(String idBolest, String naziv, GrupaBolesti grupa, ArrayList&lt;Simptom&gt; opstiSimptomi)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Korisnik</Name>
+        <Access>Public</Access>
+        <Location left="1593" top="309" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String idKorisnik</Member>
+        <Member type="Field">String ime</Member>
+        <Member type="Field">String prezime</Member>
+        <Member type="Field">String email</Member>
+        <Member type="Field">Date datumRodjenja</Member>
+        <Member type="Field">String korisnickoIme</Member>
+        <Member type="Field">String lozinka</Member>
+        <Member type="Field">TipKorisnika tipKorisnika</Member>
+        <Member type="Constructor">public Korisnik()</Member>
+        <Member type="Constructor">public Korisnik(String idKorisnik, String ime, String prezime, String email, Date datumRodjenja)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Pregled</Name>
+        <Access>Public</Access>
+        <Location left="934" top="781" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String idPregleda</Member>
+        <Member type="Field">Korisnik lekar</Member>
+        <Member type="Field">Date datumPregleda</Member>
+        <Member type="Field">ArrayList&lt;Simptom&gt; simptomi</Member>
+        <Member type="Field">Bolest dijagnostikovanaBolest</Member>
+        <Member type="Field">Lek propisanLek</Member>
+        <Member type="Constructor">public Pregled()</Member>
+        <Member type="Constructor">public Pregled(String idPregleda, Korisnik lekar, Date datumPregleda, ArrayList&lt;Simptom&gt; simptomi)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Pacijent</Name>
+        <Access>Public</Access>
+        <Location left="426" top="1211" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String idPacijent</Member>
+        <Member type="Field">String ime</Member>
+        <Member type="Field">String prezime</Member>
+        <Member type="Field">Date datumRodjenja</Member>
+        <Member type="Field">String pol</Member>
+        <Member type="Field">ArrayList&lt;Pregled&gt; pregledi</Member>
+        <Member type="Field">ArrayList&lt;Bolest&gt; bolesti</Member>
+        <Member type="Field">ArrayList&lt;Lek&gt; alergicanNaLekove</Member>
+        <Member type="Constructor">public Pacijent()</Member>
+        <Member type="Constructor">public Pacijent(String idPacijent, String ime, String prezime, Date datumRodjenja, String pol)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>432</X>
+          <Y>282</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>344</X>
+          <Y>284</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>976</X>
+          <Y>254</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1062</X>
+          <Y>262</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1375</X>
+          <Y>887</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>830</X>
+          <Y>822</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>717</X>
+          <Y>892</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>900</X>
+          <Y>1362</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>332</X>
+          <Y>1345</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1212</X>
+          <Y>1432</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1165</X>
+          <Y>420</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

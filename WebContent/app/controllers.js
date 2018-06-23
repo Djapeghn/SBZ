@@ -520,10 +520,9 @@ app.controller('pacijentController', function($scope, pacijentFactory, pregledFa
 	};
 	
 	$scope.refresh = function(){
-		pacijentFactory.getPacijenti()
-	          .success(function(data1){
+		pacijentFactory.getPacijenti().success(function(data1){
 	        	  $scope.pacijenti = data1;
-	          });
+	    });
         pregledFactory.getPregledi().success(function (data2) {
         	$scope.pregledi = data2;
 		});
@@ -696,36 +695,53 @@ app.controller('pacijentController', function($scope, pacijentFactory, pregledFa
 		$scope.pregled.propisanLek = {};
 		$scope.alergicanNaLekove1 = {};
 		
-		for(var i=0; i<$scope.simptomiPregledaFields.fields.length; i++) {
-			if($scope.simptomiPregledaFields.fields[i]!=="") {
-				$scope.pregled.simptomi.push($scope.simptomiPregledaFields.fields[i]);
-			}
-		}
+		var unetAlergican = false;
 		
-		for(var i=0; i<$scope.alergicanNaLekoveFields.fields.length; i++) {
-			if($scope.alergicanNaLekoveFields.fields[i]!=="") {
-				$scope.alergicanNaLekove1 = angular.fromJson($scope.alergicanNaLekoveFields.fields[i]);
-				$rootScope.detailViewPacijent.alergicanNaLekove.push($scope.alergicanNaLekove1);
-			}
-		}
-		
-		if ($scope.dijagnostikovanaBolest1!==undefined) {
-			//pretvara json string u objekat
-			$scope.pregled.dijagnostikovanaBolest = angular.fromJson($scope.dijagnostikovanaBolest1);
-			$rootScope.detailViewPacijent.bolesti.push($scope.pregled.dijagnostikovanaBolest);
-		}
 		if ($scope.propisanLek1!==undefined) {
-			//pretvara json string u objekat
-			$scope.pregled.propisanLek = angular.fromJson($scope.propisanLek1);
+			for(var n=0; n<$rootScope.detailViewPacijent.alergicanNaLekove.length; n++) {
+				if ($rootScope.detailViewPacijent.alergicanNaLekove[n].idLek===(angular.fromJson($scope.propisanLek1)).idLek) {
+					unetAlergican = true;
+				}
+			}
+		}
+		
+		if (unetAlergican) {
+			toast("Pacijent je alergican na izabrani lek.");
+		} else {
+			
+			for(var i=0; i<$scope.simptomiPregledaFields.fields.length; i++) {
+				if($scope.simptomiPregledaFields.fields[i]!=="") {
+					$scope.pregled.simptomi.push($scope.simptomiPregledaFields.fields[i]);
+				}
+			}
+			
+			for(var i=0; i<$scope.alergicanNaLekoveFields.fields.length; i++) {
+				if($scope.alergicanNaLekoveFields.fields[i]!=="") {
+					$scope.alergicanNaLekove1 = angular.fromJson($scope.alergicanNaLekoveFields.fields[i]);
+					$rootScope.detailViewPacijent.alergicanNaLekove.push($scope.alergicanNaLekove1);
+				}
+			}
+			
+			if ($scope.dijagnostikovanaBolest1!==undefined) {
+				//pretvara json string u objekat
+				$scope.pregled.dijagnostikovanaBolest = angular.fromJson($scope.dijagnostikovanaBolest1);
+				$rootScope.detailViewPacijent.bolesti.push($scope.pregled.dijagnostikovanaBolest);
+			}
+			if ($scope.propisanLek1!==undefined) {
+				//pretvara json string u objekat
+				$scope.pregled.propisanLek = angular.fromJson($scope.propisanLek1);
+			}
+			
 			$rootScope.detailViewPacijent.pregledi.push($scope.pregled);
 			$scope.modifyPacijent($rootScope.detailViewPacijent);
 			userPersistenceService.setCookieData5($rootScope.detailViewPacijent);
+			
+			console.log($scope.pregled);
+			
+			$scope.addPregled($scope.pregled);
+			$scope.back();
+			
 		}
-		
-		console.log($scope.pregled);
-		
-		$scope.addPregled($scope.pregled);
-		$scope.back();
 	}
 	
 	$scope.dijagnostikaSubmit = function() {
